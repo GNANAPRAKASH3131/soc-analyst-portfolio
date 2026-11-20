@@ -28,15 +28,16 @@ soc-analyst-portfolio/
 
 1. **Accessibility & Navigation**: Skip-to-content link, responsive navbar with GP monogram logo, active Scrollspy section tracking, mobile drawer toggle, and smooth scrolling.
 2. **Hero Section (`#home`)**: Professional identity summary, headline, call-to-actions, social profile badges, and a professional portrait presentation card with an active operational status badge (`Active & Ready to Deploy`) and specialization indicators.
-3. **About Me (`#about`)**: B.Tech in CSE with AI Specialization, foundational systems knowledge, and operational SOC objectives.
-4. **Technical Skills (`#skills`)**: 6 structured domain competency groups (SIEM Platforms, EDR & Monitoring, Networking & Protocols, Security Tools, Security Concepts & Frameworks, Systems & Scripting).
-5. **Featured Projects (`#projects`)**: Interactive domain filter bar (`All`, `SIEM & Detection`, `Network Forensics`, `Vulnerability & Systems`) with 5 detailed lab cards and expandable technical details.
-6. **Security Investigation Case Studies (`#case-studies`)**: 4 expandable incident reports with an "Expand/Collapse All" control bar, interactive MITRE ATT&CK tag filtering, and one-click terminal log copy buttons.
-7. **Interactive Detection Query Library**: Built-in modal and search engine featuring production-grade detection queries across Splunk SPL, Sysmon, Windows Event IDs, and QRadar AQL with 1-click clipboard copying.
-8. **Certifications & Training (`#certifications`)**: Highlights verified credentials from resume (Cybersecurity Essentials, Networking Basics, IT Support Essentials), specialized SOC training, and practical lab platforms.
-9. **Professional Resume (`#resume`)**: Candidate overview with a direct PDF download action button (`Gnana_Prakash_Gajula_Resume.pdf`).
-10. **Contact & Inquiries (`#contact`)**: Direct channels (Bengaluru location, direct email, phone/WhatsApp, CV download, LinkedIn, GitHub, TryHackMe) and an interactive contact form with active message delivery via FormSubmit, optional Web3Forms integration, live input validation, and a prefilled email client fallback.
-11. **Navigation & Floating Controls**: Floating Back-to-Top button with live scrolling state and dynamic copyright year.
+3. **About Me (`#about`)**: B.Tech in CSE with AI Specialization (2022 – 2026, CGPA: 7.25/10), foundational systems knowledge, and operational SOC objectives.
+4. **Professional Experience (`#experience`)**: Frontline cybersecurity roles including SOC Analyst Intern at Cartel Software Pvt. Ltd (Bengaluru) and Cyber Security Intern at CyArt Tech LLP (Remote).
+5. **Technical Skills (`#skills`)**: 6 structured domain competency groups (SIEM Platforms, Security Monitoring, Endpoint & EDR, Networking & Protocols, Security Tools, Frameworks & Scripting).
+6. **Featured Projects (`#projects`)**: Headline implementations including SOC Visibility & Detection Health Platform, Security Baseline Checker, Splunk Monitoring, QRadar Offense Triage, and Wireshark Traffic Forensics.
+7. **Security Investigation Case Studies (`#case-studies`)**: 4 expandable incident reports with an "Expand/Collapse All" control bar, interactive MITRE ATT&CK tag filtering, and one-click terminal log copy buttons.
+8. **Interactive Detection Query Library**: Built-in modal and search engine featuring production-grade detection queries across Splunk SPL, Sysmon, Windows Event IDs, and QRadar AQL with 1-click clipboard copying.
+9. **Certifications & Education (`#certifications`)**: Highlights verified credentials from resume (Certified Cyber Security Analyst - C3SA, Networking Basics, Cybersecurity Essentials) and B.Tech CSE (AI) degree metrics.
+10. **Professional Resume**: Direct candidate PDF download action button (`Gnana_Prakash_Gajula_Resume.pdf`).
+11. **Contact & Inquiries (`#contact`)**: Direct channels (Bengaluru location, direct email, phone/WhatsApp, CV download, LinkedIn, GitHub, TryHackMe) and an interactive contact form with active message delivery via FormSubmit, optional Web3Forms integration, live input validation, and a prefilled email client fallback.
+12. **Navigation & Floating Controls**: Floating Back-to-Top button with live scrolling state and dynamic copyright year.
 
 ---
 
@@ -118,4 +119,5 @@ git push -u origin main
 - [x] **Contact Form Delivery**: Configured with active FormSubmit delivery and mail client fallback.
 - [x] **LinkedIn URL**: Linked to `https://www.linkedin.com/in/gnanaprakash-gajula/`.
 - [x] **GitHub URL**: Linked to `https://github.com/GNANAPRAKASH3131`.
-- [x] **Certifications**: Updated to match resume (Cybersecurity Essentials, Networking Basics, IT Support Essentials).
+- [x] **Certifications**: Updated to match resume (Certified Cyber Security Analyst - C3SA, Networking Basics, Cybersecurity Essentials).
+- [x] **Experience & Headline Projects**: Updated to reflect SOC Analyst Intern (Cartel Software), Cyber Security Intern (CyArt Tech), SOC Visibility Platform, and Security Baseline Checker.
