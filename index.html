@@ -411,6 +411,31 @@
                 </ul>
               </div>
 
+                            <!-- Expandable Technical Architecture Details -->
+              <details class="project-details">
+                <summary>
+                  <span class="summary-text">View Architecture & Telemetry Pipeline Details</span>
+                  <span class="summary-icon"></span>
+                </summary>
+                <div class="details-content">
+                  <div class="details-section">
+                    <h4>CanaryLog & RuleDecay Telemetry Health</h4>
+                    <p>
+                      <strong>CanaryLog</strong> injects synthetic, timestamped health beacons into endpoints to verify continuous ingestion pipelines. If event delivery latency exceeds operational thresholds or heartbeat telemetry halts, alerts trigger before silent log drops blind the SOC.
+                    </p>
+                    <p>
+                      <strong>RuleDecay</strong> parses Sigma detection rules and maps required log fields against active telemetry streams, programmatically identifying degraded fields, unparsed schema variations, and blindspots across Windows Security (4624/4625/4688) and PowerShell (4104).
+                    </p>
+                  </div>
+                  <div class="details-section">
+                    <h4>Splunk REST API & PostgreSQL Audit Persistence</h4>
+                    <p>
+                      Leverages authenticated Splunk REST endpoints to extract live event frequency and telemetry indicators. Alerts undergo stateful deduplication and recovery tracking backed by a relational PostgreSQL schema, generating audit-ready health metrics and MTTR tracking for detection engineers.
+                    </p>
+                  </div>
+                </div>
+              </details>
+
               <div class="project-footer">
                 <a href="https://github.com/GNANAPRAKASH3131" class="btn btn-outline btn-sm" target="_blank"
                   rel="noopener noreferrer">
@@ -426,7 +451,7 @@
           </article>
 
           <!-- Featured Project 2: Security Baseline Checker -->
-          <article class="card project-card" data-category="engineering">
+          <article class="card project-card project-featured" data-category="engineering">
             <div class="project-header">
               <span class="project-tag-featured">★ Internship Project</span>
               <span class="project-env-tag">CyArt Tech LLP</span>
@@ -467,6 +492,28 @@
                 </ul>
               </div>
 
+                            <!-- Expandable Verification Details -->
+              <details class="project-details">
+                <summary>
+                  <span class="summary-text">View Baseline Verification & Pytest Test Suite</span>
+                  <span class="summary-icon"></span>
+                </summary>
+                <div class="details-content">
+                  <div class="details-section">
+                    <h4>Modular Security Collectors & YAML Policy Engine</h4>
+                    <p>
+                      Architected modular Python collectors that query Linux host configurations, inspecting SSH daemon parameters (<code>PermitRootLogin no</code>, <code>PasswordAuthentication no</code>), UFW firewall active rules, PAM authentication controls, and strict file mode permissions on <code>/etc/shadow</code> and <code>/etc/passwd</code>.
+                    </p>
+                  </div>
+                  <div class="details-section">
+                    <h4>Automated Pytest Testing & Remediation Playbooks</h4>
+                    <p>
+                      Implemented a comprehensive automated testing framework using Pytest, achieving <strong>30/30 passing test cases</strong> validating parser resilience, comparison boundary checks, and error handling. For any failing control, the tool exports structured remediation commands (e.g. <code>chmod 640 /etc/shadow</code>, <code>ufw default deny incoming</code>) for instant sysadmin action.
+                    </p>
+                  </div>
+                </div>
+              </details>
+
               <div class="project-footer">
                 <a href="https://github.com/GNANAPRAKASH3131" class="btn btn-outline btn-sm" target="_blank"
                   rel="noopener noreferrer">
@@ -481,473 +528,6 @@
             </div>
           </article>
 
-          <!-- Project 1: Splunk (Featured / Prominent) -->
-          <article class="card project-card project-featured" data-category="siem">
-            <div class="project-header">
-              <span class="project-tag-featured">★ Featured Lab</span>
-              <span class="project-env-tag">Lab Simulation</span>
-            </div>
-
-            <div class="project-body">
-              <h3 class="project-title">SOC Security Monitoring and Incident Investigation Using Splunk</h3>
-              <p class="project-desc">
-                Comprehensive security monitoring and threat detection lab in Splunk Enterprise focused on ingesting
-                endpoint security logs, identifying authentication anomalies, engineering SPL detection queries, and
-                deploying operational SOC dashboards for incident triage.
-              </p>
-
-              <div class="project-meta-block">
-                <div class="meta-item">
-                  <span class="meta-label">Objective:</span>
-                  <p class="meta-value">Establish continuous log monitoring, detect simulated brute-force authentication
-                    spikes, and build analyst triage workflows.</p>
-                </div>
-              </div>
-
-              <div class="project-tools">
-                <span class="tools-label">Tools Used:</span>
-                <div class="tools-tags">
-                  <span class="tool-tag">Splunk Enterprise</span>
-                  <span class="tool-tag">Windows Security Logs (4624/4625)</span>
-                  <span class="tool-tag">Sysmon</span>
-                  <span class="tool-tag">SPL</span>
-                </div>
-              </div>
-
-              <div class="project-activities">
-                <span class="activities-label">Key Activities:</span>
-                <ul class="activities-list">
-                  <li>Configured log ingestion and field extractions for Windows security telemetry.</li>
-                  <li>Engineered threshold-based SPL queries to detect high-frequency failed logons (EventCode 4625).
-                  </li>
-                  <li>Constructed an interactive SOC monitoring dashboard visualizing event volume and targeted
-                    accounts.</li>
-                  <li>Conducted alert investigation and documented root-cause findings for simulated intrusion attempts.
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Screenshot Placeholder -->
-              <div class="project-screenshot-placeholder">
-                <div class="placeholder-icon">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                  </svg>
-                </div>
-                <div class="placeholder-text">
-                  <strong>Screenshot Placeholder:</strong> Splunk SOC Monitoring Dashboard & Failed Login Triage View
-                </div>
-                <span class="placeholder-hint">Replace with image from assets/projects/</span>
-              </div>
-
-              <!-- Expandable Details -->
-              <details class="project-details">
-                <summary>
-                  <span class="summary-text">View Investigation Details & Methodology</span>
-                  <span class="summary-icon"></span>
-                </summary>
-                <div class="details-content">
-                  <div class="details-section">
-                    <h4>Detection Methodology & SPL Logic</h4>
-                    <p>Correlated Windows Security EventCode 4625 (An account failed to log on) aggregated by
-                      <code>TargetUserName</code> and <code>WorkstationName</code> within 5-minute sliding windows to
-                      detect threshold violations indicative of password guessing or brute-force behavior.
-                    </p>
-                  </div>
-                  <div class="details-section">
-                    <h4>Simulated Scenario & Triage</h4>
-                    <p>Simulated a multi-account dictionary attack against test accounts in an isolated virtual lab
-                      environment. Triaged source IP addresses, verified account lockout statuses, and recorded incident
-                      response recommendations.</p>
-                  </div>
-                </div>
-              </details>
-
-              <div class="project-footer">
-                <a href="https://github.com/GNANAPRAKASH3131" class="btn btn-outline btn-sm" target="_blank"
-                  rel="noopener noreferrer">
-                  <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span>GitHub Repository</span>
-                  <span class="link-arrow">↗</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 2: IBM QRadar SIEM -->
-          <article class="card project-card" data-category="siem">
-            <div class="project-header">
-              <span class="project-env-tag">Lab Simulation</span>
-            </div>
-
-            <div class="project-body">
-              <h3 class="project-title">IBM QRadar SIEM Investigation Lab</h3>
-              <p class="project-desc">
-                Security event and flow correlation lab focused on QRadar offense triage, authoring custom Ariel Query
-                Language (AQL) search routines, and analyzing network flow telemetry for threat detection.
-              </p>
-
-              <div class="project-meta-block">
-                <div class="meta-item">
-                  <span class="meta-label">Objective:</span>
-                  <p class="meta-value">Triage generated offenses, evaluate offense magnitude metrics, and isolate
-                    suspicious network flows using targeted AQL queries.</p>
-                </div>
-              </div>
-
-              <div class="project-tools">
-                <span class="tools-label">Tools Used:</span>
-                <div class="tools-tags">
-                  <span class="tool-tag">IBM QRadar SIEM</span>
-                  <span class="tool-tag">AQL (Ariel Query Language)</span>
-                  <span class="tool-tag">QFlow Telemetry</span>
-                  <span class="tool-tag">Syslog</span>
-                </div>
-              </div>
-
-              <div class="project-activities">
-                <span class="activities-label">Key Activities:</span>
-                <ul class="activities-list">
-                  <li>Monitored offense queues, reviewing source/destination IPs and event magnitude.</li>
-                  <li>Authored AQL search queries to aggregate off-hours authentication anomalies.</li>
-                  <li>Correlated QFlow traffic spikes with firewall logs to identify unapproved service connections.
-                  </li>
-                  <li>Structured incident escalation summaries following standard SOC triage playbooks.</li>
-                </ul>
-              </div>
-
-              <!-- Screenshot Placeholder -->
-              <div class="project-screenshot-placeholder">
-                <div class="placeholder-icon">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                  </svg>
-                </div>
-                <div class="placeholder-text">
-                  <strong>Screenshot Placeholder:</strong> IBM QRadar Offense Summary & AQL Query Results
-                </div>
-                <span class="placeholder-hint">Replace with image from assets/projects/</span>
-              </div>
-
-              <!-- Expandable Details -->
-              <details class="project-details">
-                <summary>
-                  <span class="summary-text">View Investigation Details & Methodology</span>
-                  <span class="summary-icon"></span>
-                </summary>
-                <div class="details-content">
-                  <div class="details-section">
-                    <h4>AQL Analysis Logic</h4>
-                    <p>Executed AQL statements targeting
-                      <code>SELECT sourceip, destinationip, count(*) FROM events GROUP BY sourceip ORDER BY count(*) DESC</code>
-                      to isolate hosts generating anomalous connection counts.
-                    </p>
-                  </div>
-                  <div class="details-section">
-                    <h4>Simulated Scenario</h4>
-                    <p>Analyzed an offense triggered by an internal host performing sequential SYN packets to multiple
-                      internal subnets in a test environment, evaluating rule trigger conditions.</p>
-                  </div>
-                </div>
-              </details>
-
-              <div class="project-footer">
-                <a href="https://github.com/GNANAPRAKASH3131" class="btn btn-outline btn-sm" target="_blank"
-                  rel="noopener noreferrer">
-                  <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span>GitHub Repository</span>
-                  <span class="link-arrow">↗</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 3: Wireshark Network Traffic Analysis -->
-          <article class="card project-card" data-category="network">
-            <div class="project-header">
-              <span class="project-env-tag">Lab Simulation</span>
-            </div>
-
-            <div class="project-body">
-              <h3 class="project-title">Network Traffic Analysis Using Wireshark</h3>
-              <p class="project-desc">
-                Packet-level traffic examination and protocol dissection lab analyzing PCAP captures to inspect
-                handshake flows, extract cleartext communication artifacts, and identify anomalous network behaviors.
-              </p>
-
-              <div class="project-meta-block">
-                <div class="meta-item">
-                  <span class="meta-label">Objective:</span>
-                  <p class="meta-value">Dissect standard protocols, reconstruct TCP streams, and isolate anomalous DNS
-                    queries and unencrypted HTTP traffic artifacts.</p>
-                </div>
-              </div>
-
-              <div class="project-tools">
-                <span class="tools-label">Tools Used:</span>
-                <div class="tools-tags">
-                  <span class="tool-tag">Wireshark</span>
-                  <span class="tool-tag">tcpdump</span>
-                  <span class="tool-tag">PCAP Analysis</span>
-                  <span class="tool-tag">Display Filters</span>
-                </div>
-              </div>
-
-              <div class="project-activities">
-                <span class="activities-label">Key Activities:</span>
-                <ul class="activities-list">
-                  <li>Analyzed TCP three-way handshakes (SYN, SYN-ACK, ACK) and connection termination flags.</li>
-                  <li>Filtered DNS queries to identify high-entropy domain lookups and potential tunneling indicators.
-                  </li>
-                  <li>Followed HTTP TCP streams to reconstruct unencrypted client-server request/response payloads.</li>
-                  <li>Identified suspicious connection resets (RST) and retransmissions in network traffic traces.</li>
-                </ul>
-              </div>
-
-              <!-- Screenshot Placeholder -->
-              <div class="project-screenshot-placeholder">
-                <div class="placeholder-icon">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                  </svg>
-                </div>
-                <div class="placeholder-text">
-                  <strong>Screenshot Placeholder:</strong> Wireshark Packet Breakdown & Protocol Hierarchy View
-                </div>
-                <span class="placeholder-hint">Replace with image from assets/projects/</span>
-              </div>
-
-              <!-- Expandable Details -->
-              <details class="project-details">
-                <summary>
-                  <span class="summary-text">View Investigation Details & Methodology</span>
-                  <span class="summary-icon"></span>
-                </summary>
-                <div class="details-content">
-                  <div class="details-section">
-                    <h4>Filter Construction</h4>
-                    <p>Applied targeted Wireshark display filters including <code>dns.flags.response == 0</code>,
-                      <code>http.request.method == "POST"</code>, and <code>tcp.analysis.retransmission</code> to
-                      isolate anomalous packet sequences.
-                    </p>
-                  </div>
-                  <div class="details-section">
-                    <h4>Simulated Scenario</h4>
-                    <p>Analyzed a simulated infected host PCAP trace to trace periodic beaconing requests over HTTP,
-                      documenting the destination IP, URI paths, and User-Agent headers.</p>
-                  </div>
-                </div>
-              </details>
-
-              <div class="project-footer">
-                <a href="https://github.com/GNANAPRAKASH3131" class="btn btn-outline btn-sm" target="_blank"
-                  rel="noopener noreferrer">
-                  <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span>GitHub Repository</span>
-                  <span class="link-arrow">↗</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 4: Vulnerability Assessment Lab -->
-          <article class="card project-card" data-category="audit">
-            <div class="project-header">
-              <span class="project-env-tag">Lab Simulation</span>
-            </div>
-
-            <div class="project-body">
-              <h3 class="project-title">Vulnerability Assessment Lab</h3>
-              <p class="project-desc">
-                Structured host discovery, port scanning, and vulnerability auditing across isolated virtual machines
-                using industry-standard scanning tools to evaluate exposures and draft remediation plans.
-              </p>
-
-              <div class="project-meta-block">
-                <div class="meta-item">
-                  <span class="meta-label">Objective:</span>
-                  <p class="meta-value">Enumerate open network services, perform automated vulnerability scans, classify
-                    risks using CVSS metrics, and formulate remediation guidance.</p>
-                </div>
-              </div>
-
-              <div class="project-tools">
-                <span class="tools-label">Tools Used:</span>
-                <div class="tools-tags">
-                  <span class="tool-tag">Nmap</span>
-                  <span class="tool-tag">Tenable Nessus</span>
-                  <span class="tool-tag">OpenVAS / GVM</span>
-                  <span class="tool-tag">CVSS v3</span>
-                </div>
-              </div>
-
-              <div class="project-activities">
-                <span class="activities-label">Key Activities:</span>
-                <ul class="activities-list">
-                  <li>Executed Nmap SYN scans (-sS), service detection (-sV), and default NSE scripts (-sC).</li>
-                  <li>Configured credentialed and uncredentialed scans in Nessus and OpenVAS against lab hosts.</li>
-                  <li>Categorized discovered exposures by CVSS severity scores and CVE identifiers.</li>
-                  <li>Drafted remediation recommendations focusing on patching vulnerable services and disabling
-                    insecure protocols.</li>
-                </ul>
-              </div>
-
-              <!-- Screenshot Placeholder -->
-              <div class="project-screenshot-placeholder">
-                <div class="placeholder-icon">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                  </svg>
-                </div>
-                <div class="placeholder-text">
-                  <strong>Screenshot Placeholder:</strong> Nessus / OpenVAS Vulnerability Classification Dashboard
-                </div>
-                <span class="placeholder-hint">Replace with image from assets/projects/</span>
-              </div>
-
-              <!-- Expandable Details -->
-              <details class="project-details">
-                <summary>
-                  <span class="summary-text">View Investigation Details & Methodology</span>
-                  <span class="summary-icon"></span>
-                </summary>
-                <div class="details-content">
-                  <div class="details-section">
-                    <h4>Assessment Lifecycle</h4>
-                    <p>Discovery & Scope Identification &rarr; Port & Service Enumeration &rarr; Vulnerability Scanning
-                      &rarr; False-Positive Filtering &rarr; Remediation Strategy.</p>
-                  </div>
-                  <div class="details-section">
-                    <h4>Simulated Scenario</h4>
-                    <p>Scanned an authorized vulnerable lab virtual machine running legacy SMB and web services,
-                      identifying high-risk misconfigurations and validating remediation patches.</p>
-                  </div>
-                </div>
-              </details>
-
-              <div class="project-footer">
-                <a href="https://github.com/GNANAPRAKASH3131" class="btn btn-outline btn-sm" target="_blank"
-                  rel="noopener noreferrer">
-                  <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span>GitHub Repository</span>
-                  <span class="link-arrow">↗</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 5: Linux Privilege Escalation and Security Lab -->
-          <article class="card project-card" data-category="audit">
-            <div class="project-header">
-              <span class="project-env-tag">Lab Simulation</span>
-            </div>
-
-            <div class="project-body">
-              <h3 class="project-title">Linux Privilege Escalation and Security Lab</h3>
-              <p class="project-desc">
-                Defensive system audit and configuration review in an authorized educational Linux environment,
-                identifying misconfigured file permissions, SUID binaries, and applying system hardening principles.
-              </p>
-
-              <div class="project-meta-block">
-                <div class="meta-item">
-                  <span class="meta-label">Objective:</span>
-                  <p class="meta-value">Understand Linux permission models, identify security weaknesses stemming from
-                    misconfigurations, and implement defensive hardening measures.</p>
-                </div>
-              </div>
-
-              <div class="project-tools">
-                <span class="tools-label">Tools Used:</span>
-                <div class="tools-tags">
-                  <span class="tool-tag">Linux (Ubuntu/Debian)</span>
-                  <span class="tool-tag">Bash Scripting</span>
-                  <span class="tool-tag">SUID/SGID Auditing</span>
-                  <span class="tool-tag">Sudoers Policy</span>
-                </div>
-              </div>
-
-              <div class="project-activities">
-                <span class="activities-label">Key Activities:</span>
-                <ul class="activities-list">
-                  <li>Audited Linux system permissions, looking for world-writable configuration files and scripts.</li>
-                  <li>Enumerated SUID/SGID binaries using command-line queries to detect anomalous executables.</li>
-                  <li>Evaluated sudoers configurations for dangerous wildcards and permission delegation flaws.</li>
-                  <li>Implemented defensive controls: revoked unneeded SUID flags, secured cron jobs, and audited access
-                    logs.</li>
-                </ul>
-              </div>
-
-              <!-- Screenshot Placeholder -->
-              <div class="project-screenshot-placeholder">
-                <div class="placeholder-icon">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                  </svg>
-                </div>
-                <div class="placeholder-text">
-                  <strong>Screenshot Placeholder:</strong> Linux Security Audit & Hardening Verification Terminal
-                </div>
-                <span class="placeholder-hint">Replace with image from assets/projects/</span>
-              </div>
-
-              <!-- Expandable Details -->
-              <details class="project-details">
-                <summary>
-                  <span class="summary-text">View Investigation Details & Methodology</span>
-                  <span class="summary-icon"></span>
-                </summary>
-                <div class="details-content">
-                  <div class="details-section">
-                    <h4>Audit Commands Utilized</h4>
-                    <p>Utilized native commands including <code>find / -perm -4000 -type f 2>/dev/null</code>,
-                      <code>sudo -l</code>, and audited crontab entries in <code>/etc/cron*</code> for execution safety.
-                    </p>
-                  </div>
-                  <div class="details-section">
-                    <h4>Simulated Scenario & Remediation</h4>
-                    <p>Identified an authorized test binary configured with SUID root permissions. Stripped the SUID bit
-                      using <code>chmod u-s</code>, documented the vulnerability vector, and verified system integrity.
-                    </p>
-                  </div>
-                </div>
-              </details>
-
-              <div class="project-footer">
-                <a href="https://github.com/GNANAPRAKASH3131" class="btn btn-outline btn-sm" target="_blank"
-                  rel="noopener noreferrer">
-                  <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span>GitHub Repository</span>
-                  <span class="link-arrow">↗</span>
-                </a>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
