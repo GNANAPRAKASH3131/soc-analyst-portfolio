@@ -2,1591 +2,983 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Professional portfolio of Gnana Prakash Gajula — SOC Analyst specializing in Security Operations, SIEM monitoring, threat detection, log analysis, and incident investigation.">
-  <meta name="keywords"
-    content="Gnana Prakash Gajula, SOC Analyst, Security Operations Center, SIEM, Splunk, QRadar, Threat Detection, Incident Response, Cybersecurity, Bengaluru">
-  <meta name="author" content="Gnana Prakash Gajula">
-  <meta property="og:title" content="Gnana Prakash Gajula | SOC Analyst Portfolio">
-  <meta property="og:description"
-    content="Defending Digital Infrastructure Through Security Operations. Specializing in SIEM monitoring, threat detection, and incident response.">
-  <meta property="og:type" content="website">
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1220'/><text x='50%' y='65%' font-family='sans-serif' font-weight='900' font-size='50' fill='%2322D3EE' text-anchor='middle'>GP</text></svg>">
-  <title>Gnana Prakash Gajula | SOC Analyst Portfolio</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <script src="js/script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional portfolio of Gnana Prakash Gajula — SOC Analyst specializing in Security Operations, SIEM monitoring, threat detection, log analysis, and incident response.">
+    <meta name="keywords" content="Gnana Prakash Gajula, SOC Analyst, Security Operations Center, SIEM, Splunk, QRadar, Threat Detection, Incident Response, Cybersecurity, Bengaluru">
+    <meta name="author" content="Gnana Prakash Gajula">
+    <title>Gnana Prakash Gajula - SOC Analyst Portfolio</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232a6bb4'/><text x='50%' y='65%' font-family='sans-serif' font-weight='900' font-size='50' fill='%23dff0ff' text-anchor='middle'>G</text></svg>">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .glitche {
+            position: relative;
+            animation: glitch 1.5s linear infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(3deg); }
+        }
+
+        .highlight {
+            color: #2a6bb4;
+            font-weight: 700;
+        }
+
+        .hero-img img {
+            border: 4px solid #9fcdfe;
+            box-shadow: 0 0 35px rgba(42, 107, 180, 0.45);
+            transition: transform 0.4s ease;
+        }
+
+        .hero-img img:hover {
+            transform: scale(1.03);
+        }
+    </style>
 </head>
 
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <header>
-    <nav class="container nav">
-      <div class="logo">
-        <a href="#home" class="logo-link" aria-label="Gnana Prakash Gajula">
-          <span class="logo-monogram">GP</span>
-          <span class="logo-text">Gnana Prakash Gajula</span>
-        </a>
-      </div>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span class="hamburger"></span>
-      </button>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#case-studies">Case Studies</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+    <!-- Preloader Section -->
+    <div class="preloader">
+        <div class="matrix-container">
+            <canvas id="matrix-canvas"></canvas>
+        </div>
+        <div class="preloader-content">
+            <div class="logo-container">
+                <span class="logo-text">G</span>
+            </div>
+            <h2 class="preloader-title">GNANI'S PORTFOLIO</h2>
+            <div class="preloader-bar">
+                <div class="bar-fill"></div>
+            </div>
+        </div>
+    </div>
 
-  <main id="main-content">
-    <!-- Hero / Intro Section -->
-    <section class="hero" id="home">
-      <div class="container hero-inner">
-        <div class="hero-content">
-          <h1>Gnana Prakash Gajula</h1>
-          <p>I am an aspiring SOC Analyst passionate about security monitoring, log analysis, alert triage, incident
-            investigation, and threat detection.</p>
-          <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary">View Projects</a>
-            <a href="assets/resume/resume.pdf" class="btn btn-secondary" id="resumeDownloadBtn"
-              download="Gnana_Prakash_Gajula_Resume.pdf" target="_blank" rel="noopener noreferrer">
-              <span>Download Resume</span>
-              <span class="btn-icon">⤓</span>
-            </a>
-            <a href="#contact" class="btn btn-outline">Contact Me</a>
-          </div>
-          <div class="hero-socials">
-            <a href="https://github.com/GNANAPRAKASH3131" class="social-link" target="_blank" rel="noopener noreferrer"
-              aria-label="GitHub">
-              <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              <span>GitHub</span>
-              <span class="link-arrow">↗</span>
-            </a>
-            <a href="https://www.linkedin.com/in/gnanaprakash-gajula/" class="social-link" target="_blank"
-              rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-              <span>LinkedIn</span>
-              <span class="link-arrow">↗</span>
-            </a>
-          </div>
-        </div>
-        <div class="hero-image-wrapper">
-          <div class="hero-profile-card">
-            <div class="profile-frame">
-              <img src="assets/images/profile.jpg" alt="Gnana Prakash Gajula - SOC Analyst" class="profile-photo"
-                width="400" height="480" loading="eager">
-              <div class="profile-status-badge">
-                <span class="status-pulse-dot" aria-hidden="true"></span>
-                <span>Active & Ready to Deploy</span>
-              </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6 col-md-3">
+                    <a href="#" class="logo" data-text="Gnani's Portifolio">Gnani's Portifolio</a>
+                </div>
+                <div class="col-6 col-md-9 d-flex justify-content-end">
+                    <button class="mobile-nav-toggle d-md-none" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <nav class="nav-menu d-none d-md-block">
+                        <ul class="nav-list">
+                            <li class="nav-item"><a href="#hero" class="nav-link active" data-tooltip="Home"><i class="fas fa-home"></i></a></li>
+                            <li class="nav-item"><a href="#about" class="nav-link" data-tooltip="About"><i class="fas fa-user"></i></a></li>
+                            <li class="nav-item"><a href="#education" class="nav-link" data-tooltip="Education"><i class="fas fa-graduation-cap"></i></a></li>
+                            <li class="nav-item"><a href="#internship" class="nav-link" data-tooltip="Experience"><i class="fas fa-briefcase"></i></a></li>
+                            <li class="nav-item"><a href="#skills" class="nav-link" data-tooltip="Skills"><i class="fas fa-shield-alt"></i></a></li>
+                            <li class="nav-item"><a href="#certificates" class="nav-link" data-tooltip="Certificates"><i class="fas fa-certificate"></i></a></li>
+                            <li class="nav-item"><a href="#projects" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i></a></li>
+                            <li class="nav-item"><a href="#case-studies" class="nav-link" data-tooltip="Case Studies"><i class="fas fa-search"></i></a></li>
+                            <li class="nav-item"><a href="#query-library" class="nav-link" data-tooltip="Query Library"><i class="fas fa-terminal"></i></a></li>
+                            <li class="nav-item"><a href="#contact" class="nav-link" data-tooltip="Contact"><i class="fas fa-envelope"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-            <div class="profile-meta-bar">
-              <div class="profile-meta-col">
-                <span class="meta-label">Specialization</span>
-                <span class="meta-val">SOC & Threat Triage</span>
-              </div>
-              <div class="profile-meta-col">
-                <span class="meta-label">Location</span>
-                <span class="meta-val">Bengaluru, India</span>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="mb-3 glitche" data-text="Hi, I'm Gnana Prakash">Hi, I'm <span class="highlight">Gnana Prakash</span></h1>
+                    <h2 class="mb-4">I'm a <span class="typing"></span></h2>
+                    <p class="mb-4 text-white" style="font-size: 1.1rem; line-height: 1.7;">
+                        Defending digital infrastructure through Security Operations Center (SOC) monitoring, SIEM log triage, and incident response. Specialized in detecting threats, analyzing attack vectors, and accelerating containment.
+                    </p>
+                    <div class="hero-buttons mb-4">
+                        <a href="#contact" class="btn btn-primary me-3 mb-2 mb-md-0">Contact Me</a>
+                        <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#resumeModal">View Resume</a>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/gnana-prakash-gajula" target="_blank" class="me-3" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/GNANAPRAKASH3131" target="_blank" class="me-3" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:gajulananil604@gmail.com" class="me-3" title="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+917993089884" title="Phone"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0 d-flex justify-content-center">
+                    <div class="hero-img">
+                        <img src="assets/images/profile.jpg" alt="Gnana Prakash Gajula" class="img-fluid rounded-circle shadow-lg" style="width: 380px; height: 380px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- About Section -->
-    <section class="about section" id="about">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow">Overview</span>
-          <h2 class="section-title">About Me</h2>
-          <div class="section-divider"></div>
-        </div>
-        <div class="about-grid">
-          <div class="card about-main-card">
-            <h3>Background & Career Focus</h3>
-            <p>
-              I hold a Bachelor of Technology in Computer Science Engineering with an AI specialization. Combining a
-              solid software and computer systems foundation with dedicated cybersecurity training, I am focused on
-              building a specialized career in Security Operations.
-            </p>
-            <p>
-              My core interests and technical development center on frontline defense: SIEM monitoring, log telemetry
-              analysis, alert triage, incident investigation, and network security. I aim to contribute to
-              high-reliability SOC environments by systematically analyzing anomalies, neutralizing threats, and
-              defending mission-critical digital infrastructure.
-            </p>
-          </div>
-          <div class="about-highlights-grid">
-            <div class="card highlight-card">
-              <div class="highlight-badge">B.Tech</div>
-              <h4>Education & AI</h4>
-              <p class="highlight-title">CSE with AI Specialization</p>
-              <p class="highlight-desc">Strong foundation in system architecture, data structures, algorithms, and
-                applied machine learning principles.</p>
+    <section id="about" class="about py-5">
+        <div class="container">
+            <div class="section-heading">
+                <h2>About Me</h2>
+                <span class="section-line"></span>
             </div>
-            <div class="card highlight-card">
-              <div class="highlight-badge">SOC</div>
-              <h4>Operational Focus</h4>
-              <p class="highlight-title">Security Operations & SIEM</p>
-              <p class="highlight-desc">Hands-on practice in log ingestion, event correlation, EDR telemetry, and
-                structured alert triage.</p>
-            </div>
-            <div class="card highlight-card">
-              <div class="highlight-badge">TDIR</div>
-              <h4>Threat Detection & IR</h4>
-              <p class="highlight-title">Detection & Investigation</p>
-              <p class="highlight-desc">Aligning investigations with the MITRE ATT&CK framework and Cyber Kill Chain to
-                trace threat actor behaviors.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Professional Experience Section -->
-    <section class="experience section" id="experience">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow">Frontline Operations</span>
-          <h2 class="section-title">Professional Experience</h2>
-          <div class="section-divider"></div>
-          <p class="section-subtitle">
-            Hands-on cybersecurity and SOC internship roles focused on SIEM alert monitoring, endpoint telemetry investigation, and security baseline engineering.
-          </p>
-        </div>
-
-        <div class="timeline-container">
-          <!-- 1. SOC Analyst Intern -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <span class="timeline-dot"></span>
-              <div class="timeline-connector"></div>
-            </div>
-            <div class="card timeline-card">
-              <div class="timeline-card-header">
-                <div class="timeline-badge-group">
-                  <span class="cert-category">SOC Analyst Intern</span>
-                </div>
-                <span class="timeline-org">Cartel Software Pvt. Ltd • Bengaluru</span>
-              </div>
-              <h3 class="timeline-title">SOC Analyst Intern</h3>
-              <p class="timeline-desc">
-                Monitored and triaged SIEM alerts across Splunk Enterprise and IBM QRadar. Investigated phishing emails and suspicious threat indicators, escalating confirmed security incidents per SOC SOPs. Conducted endpoint investigations using Microsoft Defender XDR, Sysmon, and Windows Event Logs to identify malicious activity and support MITRE ATT&CK detection mapping. Documented investigation findings, incident metrics, and remediation guidance while gaining exposure to playbook-driven SOAR workflows.
-              </p>
-              <div class="timeline-tags">
-                <span class="tool-tag">Splunk Enterprise</span>
-                <span class="tool-tag">IBM QRadar</span>
-                <span class="tool-tag">Microsoft Defender XDR</span>
-                <span class="tool-tag">Sysmon</span>
-                <span class="tool-tag">Windows Event Logs</span>
-                <span class="tool-tag">Phishing Triage</span>
-                <span class="tool-tag">MITRE ATT&CK</span>
-                <span class="tool-tag">SOAR Playbooks</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2. Cyber Security Intern -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <span class="timeline-dot"></span>
-            </div>
-            <div class="card timeline-card">
-              <div class="timeline-card-header">
-                <div class="timeline-badge-group">
-                  <span class="cert-category">Cyber Security Intern</span>
-                </div>
-                <span class="timeline-org">CyArt Tech LLP • Remote</span>
-              </div>
-              <h3 class="timeline-title">Cyber Security Intern</h3>
-              <p class="timeline-desc">
-                Assigned to the Security Baseline Checker project to assess live Linux security configurations against YAML-defined security policies. Examined and authored Python-based security assessment modules covering SSH hardening, firewall configuration, authentication policies, and sensitive file permissions. Evaluated PASS, FAIL, and UNKNOWN assessment outcomes, drafted configuration remediation guidance, and executed automated testing with Pytest, achieving 30/30 passing tests across the test suite.
-              </p>
-              <div class="timeline-tags">
-                <span class="tool-tag">Python</span>
-                <span class="tool-tag">Linux Hardening</span>
-                <span class="tool-tag">YAML / PyYAML</span>
-                <span class="tool-tag">Pytest (30/30 Passing)</span>
-                <span class="tool-tag">SSH & Firewall Policy</span>
-                <span class="tool-tag">Security Baseline Auditing</span>
-                <span class="tool-tag">Remediation Guidance</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-
-    <!-- Technical Skills Section -->
-    <section class="skills section" id="skills">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow">Core Competencies</span>
-          <h2 class="section-title">Technical Skills</h2>
-          <div class="section-divider"></div>
-        </div>
-        <div class="skills-grid">
-          <!-- 1. SIEM -->
-          <div class="card skill-card">
-            <div class="skill-card-header">
-              <span class="skill-category-badge">01</span>
-              <h3>SIEM Platforms</h3>
-            </div>
-            <p class="skill-card-desc">Log ingestion, correlation rules, search queries, and alert monitoring
-              dashboards.</p>
-            <div class="skill-tags">
-              <span class="skill-tag">Splunk Enterprise</span>
-              <span class="skill-tag">IBM QRadar</span>
-            </div>
-          </div>
-
-          <!-- 2. EDR and Monitoring -->
-          <div class="card skill-card">
-            <div class="skill-card-header">
-              <span class="skill-category-badge">02</span>
-              <h3>EDR & Monitoring</h3>
-            </div>
-            <p class="skill-card-desc">Host telemetry, endpoint behavior inspection, and system process visibility.</p>
-            <div class="skill-tags">
-              <span class="skill-tag">Microsoft Defender XDR</span>
-              <span class="skill-tag">Wazuh</span>
-              <span class="skill-tag">Sysmon</span>
-            </div>
-          </div>
-
-          <!-- 3. Networking -->
-          <div class="card skill-card">
-            <div class="skill-card-header">
-              <span class="skill-category-badge">03</span>
-              <h3>Networking & Protocols</h3>
-            </div>
-            <p class="skill-card-desc">Protocol analysis, network communication flows, and perimeter traffic inspection.
-            </p>
-            <div class="skill-tags">
-              <span class="skill-tag">TCP/IP</span>
-              <span class="skill-tag">DNS</span>
-              <span class="skill-tag">HTTP/HTTPS</span>
-              <span class="skill-tag">DHCP</span>
-              <span class="skill-tag">SMTP</span>
-              <span class="skill-tag">SSH</span>
-            </div>
-          </div>
-
-          <!-- 4. Security Tools -->
-          <div class="card skill-card">
-            <div class="skill-card-header">
-              <span class="skill-category-badge">04</span>
-              <h3>Security & Analysis Tools</h3>
-            </div>
-            <p class="skill-card-desc">Packet analysis, vulnerability scanning, IOC lookup, and signature definition.
-            </p>
-            <div class="skill-tags">
-              <span class="skill-tag">Wireshark</span>
-              <span class="skill-tag">Nmap</span>
-              <span class="skill-tag">Nessus</span>
-              <span class="skill-tag">OpenVAS / GVM</span>
-              <span class="skill-tag">VirusTotal</span>
-              <span class="skill-tag">tcpdump</span>
-              <span class="skill-tag">YARA</span>
-            </div>
-          </div>
-
-          <!-- 5. Security Concepts -->
-          <div class="card skill-card">
-            <div class="skill-card-header">
-              <span class="skill-category-badge">05</span>
-              <h3>Security Concepts & Frameworks</h3>
-            </div>
-            <p class="skill-card-desc">Operational methodologies, threat mapping frameworks, and defense-in-depth
-              principles.</p>
-            <div class="skill-tags">
-              <span class="skill-tag">Alert Triage</span>
-              <span class="skill-tag">Log Analysis</span>
-              <span class="skill-tag">Threat Hunting</span>
-              <span class="skill-tag">Incident Investigation</span>
-              <span class="skill-tag">MITRE ATT&CK</span>
-              <span class="skill-tag">Cyber Kill Chain</span>
-              <span class="skill-tag">Vulnerability Assessment</span>
-            </div>
-          </div>
-
-          <!-- 6. Systems and Scripting -->
-          <div class="card skill-card">
-            <div class="skill-card-header">
-              <span class="skill-category-badge">06</span>
-              <h3>Systems & Scripting</h3>
-            </div>
-            <p class="skill-card-desc">Operating system administration, automation scripts, and network topology
-              simulation.</p>
-            <div class="skill-tags">
-              <span class="skill-tag">Windows</span>
-              <span class="skill-tag">Linux</span>
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">Bash</span>
-              <span class="skill-tag">Java</span>
-              <span class="skill-tag">Cisco Packet Tracer</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Projects Section -->
-    <section class="projects section" id="projects">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow">Engineering & Detection Platforms</span>
-          <h2 class="section-title">Featured Projects</h2>
-          <div class="section-divider"></div>
-          <p class="section-subtitle">
-            Core defensive cybersecurity and automation projects featured on my resume, demonstrating end-to-end telemetry engineering, detection health monitoring, and Linux compliance auditing.
-          </p>
-        </div>
-
-        <!-- Project Filter Bar -->
-        <div class="project-filter-bar" role="tablist" aria-label="Filter projects by domain">
-          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Projects (2)</button>
-          <button class="filter-btn" data-filter="siem" role="tab" aria-selected="false">SIEM & Detection Health</button>
-          <button class="filter-btn" data-filter="engineering" role="tab" aria-selected="false">Security Baseline & Compliance</button>
-        </div>
-
-        <div class="projects-grid">
-          <!-- Flagship Project 1: SOC Visibility & Detection Health Platform -->
-          <article class="card project-card project-featured" data-category="siem">
-            <div class="project-header">
-              <span class="project-tag-featured">★ Flagship Platform</span>
-              <span class="project-env-tag">SOC Architecture</span>
-            </div>
-
-            <div class="project-body">
-              <h3 class="project-title">SOC Visibility & Detection Health Platform</h3>
-              <p class="project-desc">
-                Engineered a comprehensive SOC monitoring platform designed to assess log-source health, identify telemetry gaps, and evaluate SIEM detection-rule effectiveness across live enterprise data pipelines.
-              </p>
-
-              <div class="project-meta-block">
-                <div class="meta-item">
-                  <span class="meta-label">Objective:</span>
-                  <p class="meta-value">Continuous log-source availability verification, detection-rule health diagnostics, and audit persistence.</p>
-                </div>
-              </div>
-
-              <div class="project-tools">
-                <span class="tools-label">Tools & Tech:</span>
-                <div class="tools-tags">
-                  <span class="tool-tag">Splunk REST API</span>
-                  <span class="tool-tag">CanaryLog</span>
-                  <span class="tool-tag">RuleDecay</span>
-                  <span class="tool-tag">Sigma Rules</span>
-                  <span class="tool-tag">PostgreSQL</span>
-                  <span class="tool-tag">Python</span>
-                  <span class="tool-tag">PowerShell Logs</span>
-                </div>
-              </div>
-
-              <div class="project-activities">
-                <span class="activities-label">Key Capabilities & Architecture:</span>
-                <ul class="activities-list">
-                  <li><strong>CanaryLog Implementation:</strong> Actively monitors log-source availability, ingestion degradation, and early warnings for potential log drops.</li>
-                  <li><strong>RuleDecay Engine:</strong> Parses Sigma detection rules to programmatically flag missing, sparse, or degraded telemetry fields in the SIEM pipeline.</li>
-                  <li><strong>Splunk REST API Integration:</strong> Seamlessly queries, retrieves, and inspects live Windows Security and PowerShell event data in real time.</li>
-                  <li><strong>Audit Persistence:</strong> Built robust alert management with deduplication, recovery tracking, and PostgreSQL-backed audit storage.</li>
-                </ul>
-              </div>
-
-                            <!-- Expandable Technical Architecture Details -->
-              <details class="project-details">
-                <summary>
-                  <span class="summary-text">View Architecture & Telemetry Pipeline Details</span>
-                  <span class="summary-icon"></span>
-                </summary>
-                <div class="details-content">
-                  <div class="details-section">
-                    <h4>CanaryLog & RuleDecay Telemetry Health</h4>
-                    <p>
-                      <strong>CanaryLog</strong> injects synthetic, timestamped health beacons into endpoints to verify continuous ingestion pipelines. If event delivery latency exceeds operational thresholds or heartbeat telemetry halts, alerts trigger before silent log drops blind the SOC.
-                    </p>
-                    <p>
-                      <strong>RuleDecay</strong> parses Sigma detection rules and maps required log fields against active telemetry streams, programmatically identifying degraded fields, unparsed schema variations, and blindspots across Windows Security (4624/4625/4688) and PowerShell (4104).
-                    </p>
-                  </div>
-                  <div class="details-section">
-                    <h4>Splunk REST API & PostgreSQL Audit Persistence</h4>
-                    <p>
-                      Leverages authenticated Splunk REST endpoints to extract live event frequency and telemetry indicators. Alerts undergo stateful deduplication and recovery tracking backed by a relational PostgreSQL schema, generating audit-ready health metrics and MTTR tracking for detection engineers.
-                    </p>
-                  </div>
-                </div>
-              </details>
-
-              <div class="project-footer">
-                <a href="https://github.com/GNANAPRAKASH3131" class="btn btn-outline btn-sm" target="_blank"
-                  rel="noopener noreferrer">
-                  <svg class="btn-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span>GitHub Repository</span>
-                  <span class="link-arrow">↗</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Featured Project 2: Security Baseline Checker -->
-          <article class="card project-card project-featured" data-category="engineering">
-            <div class="project-header">
-              <span class="project-tag-featured">★ Internship Project</span>
-              <span class="project-env-tag">CyArt Tech LLP</span>
-            </div>
-
-            <div class="project-body">
-              <h3 class="project-title">Security Baseline Checker — CyArt Tech LLP</h3>
-              <p class="project-desc">
-                Assigned cybersecurity internship project focused on assessing live Linux server configurations against YAML-defined security baselines and generating actionable remediation reports.
-              </p>
-
-              <div class="project-meta-block">
-                <div class="meta-item">
-                  <span class="meta-label">Objective:</span>
-                  <p class="meta-value">Automated Linux security compliance auditing, baseline validation, and modular posture reporting.</p>
-                </div>
-              </div>
-
-              <div class="project-tools">
-                <span class="tools-label">Tools & Tech:</span>
-                <div class="tools-tags">
-                  <span class="tool-tag">Python</span>
-                  <span class="tool-tag">YAML / PyYAML</span>
-                  <span class="tool-tag">Pytest (30/30)</span>
-                  <span class="tool-tag">Linux (Ubuntu/Debian)</span>
-                  <span class="tool-tag">SSH Hardening</span>
-                  <span class="tool-tag">UFW Firewall</span>
-                </div>
-              </div>
-
-              <div class="project-activities">
-                <span class="activities-label">Key Capabilities & Architecture:</span>
-                <ul class="activities-list">
-                  <li><strong>Modular Collectors:</strong> Evaluated application architecture covering SSH hardening, firewall state, password policies, and file permissions.</li>
-                  <li><strong>Comparison & Evaluation Logic:</strong> Classified security settings into PASS, FAIL, and UNKNOWN outcomes with structured remediation guidance.</li>
-                  <li><strong>Automated Test Suite:</strong> Developed and ran automated Pytest test cases, achieving 100% test passing rate (30/30 tests passed).</li>
-                  <li><strong>Remediation Playbooks:</strong> Formulated step-by-step sysadmin mitigation guides for identified Linux security misconfigurations.</li>
-                </ul>
-              </div>
-
-                            <!-- Expandable Verification Details -->
-              <details class="project-details">
-                <summary>
-                  <span class="summary-text">View Baseline Verification & Pytest Test Suite</span>
-                  <span class="summary-icon"></span>
-                </summary>
-                <div class="details-content">
-                  <div class="details-section">
-                    <h4>Modular Security Collectors & YAML Policy Engine</h4>
-                    <p>
-                      Architected modular Python collectors that query Linux host configurations, inspecting SSH daemon parameters (<code>PermitRootLogin no</code>, <code>PasswordAuthentication no</code>), UFW firewall active rules, PAM authentication controls, and strict file mode permissions on <code>/etc/shadow</code> and <code>/etc/passwd</code>.
-                    </p>
-                  </div>
-                  <div class="details-section">
-                    <h4>Automated Pytest Testing & Remediation Playbooks</h4>
-                    <p>
-                      Implemented a comprehensive automated testing framework using Pytest, achieving <strong>30/30 passing test cases</strong> validating parser resilience, comparison boundary checks, and error handling. For any failing control, the tool exports structured remediation commands (e.g. <code>chmod 640 /etc/shadow</code>, <code>ufw default deny incoming</code>) for instant sysadmin action.
-                    </p>
-                  </div>
-                </div>
-              </details>
-
-              <div class="project-footer">
-                <a href="https://github.com/GNANAPRAKASH3131" class="btn btn-outline btn-sm" target="_blank"
-                  rel="noopener noreferrer">
-                  <svg class="btn-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span>GitHub Repository</span>
-                  <span class="link-arrow">↗</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Security Investigation Case Studies Section -->
-    <section class="case-studies section" id="case-studies">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow">Practical Lab Reports</span>
-          <h2 class="section-title">Security Investigation Case Studies</h2>
-          <div class="section-divider"></div>
-          <p class="section-subtitle">
-            Detailed, step-by-step reports of simulated SOC lab investigations, analyzing attack behaviors, artifacts,
-            and mitigation strategies.
-          </p>
-        </div>
-
-        <!-- Interactive Toolbar: Expand/Collapse All & Active Filter Bar -->
-        <div class="cases-toolbar">
-          <div class="toolbar-left">
-            <span class="toolbar-pill">4 Case Reports</span>
-            <div id="mitreActiveFilterBar" class="mitre-active-filter-bar" style="display:none;">
-              <span>Filtered by MITRE: <strong id="activeMitreTagLabel"></strong></span>
-              <button type="button" class="btn-clear-filter" id="clearMitreFilterBtn"
-                title="Clear filter">&times;</button>
-            </div>
-          </div>
-          <div class="toolbar-actions">
-            <button type="button" class="btn-toolbar" id="btnToggleAllCases">
-              <span id="toggleAllCasesIcon">📂</span>
-              <span id="toggleAllCasesText">Expand All Reports</span>
-            </button>
-            <button type="button" class="btn-toolbar btn-toolbar-highlight" id="btnOpenQueryModal">
-              <span>⚡ Detection Query Library</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="cases-grid">
-          <!-- Case Study 1 -->
-          <article class="card case-card">
-            <div class="case-card-header">
-              <div class="case-badge-group">
-                <span class="case-number">CASE #01</span>
-              </div>
-              <span class="case-domain-tag">Identity & Access Monitoring</span>
-            </div>
-
-            <h3 class="case-title">Multiple Failed Authentication Attempts</h3>
-            <p class="case-summary">
-              Investigation of an automated SIEM threshold alert triggered by over 60 failed logon attempts within 3
-              minutes from a single internal workstation targeting domain credentials.
-            </p>
-
-            <div class="case-meta-preview">
-              <div class="case-meta-item">
-                <span class="case-meta-label">Primary Tool:</span>
-                <span class="case-meta-val">Splunk Enterprise (SPL)</span>
-              </div>
-              <div class="case-meta-item">
-                <span class="case-meta-label">MITRE ATT&CK:</span>
-                <span class="case-meta-val">T1110.003 (Password Spraying)</span>
-              </div>
-            </div>
-
-            <!-- Expandable Full Report -->
-            <details class="case-details">
-              <summary>
-                <span class="summary-text">Read Full Investigation Report</span>
-                <span class="summary-icon"></span>
-              </summary>
-              <div class="case-report-body">
-                <div class="report-section">
-                  <h4>1. Scenario</h4>
-                  <p>A threshold-based correlation rule in Splunk Enterprise alerted on abnormal authentication failures
-                    originating from an internal host (<code>192.168.10.45</code> / <code>WS-LAB-04</code>), iterating
-                    through multiple departmental user accounts in an isolated Active Directory test environment.</p>
-                </div>
-
-                <div class="report-section">
-                  <h4>2. Investigation Objective</h4>
-                  <p>Determine whether the activity represents an unauthorized password-spray attack, verify if any
-                    account credentials were breached, identify the originating process, and formulate containment
-                    actions.</p>
-                </div>
-
-                <div class="report-section">
-                  <h4>3. Evidence Reviewed</h4>
-                  <p>Windows Security Event Logs (<code>EventCode 4625</code> - Audit Failure;
-                    <code>EventCode 4624</code> - Successful Logon with Logon Type 3 Network), Active Directory
-                    authentication logs, and endpoint Sysmon telemetry.
-                  </p>
-                </div>
-
-                <div class="report-section">
-                  <h4>4. Tools Used</h4>
-                  <div class="tools-tags">
-                    <span class="tool-tag">Splunk Enterprise</span>
-                    <span class="tool-tag">SPL</span>
-                    <span class="tool-tag">Windows Event Viewer</span>
-                    <span class="tool-tag">Sysmon</span>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>5. Terminal Log Sample</h4>
-                  <div class="terminal-log-box">
-                    <div class="terminal-header">
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-title">splunk-auth-failure.log</span>
-                      <button class="btn-copy-log" aria-label="Copy log sample to clipboard"><span
-                          class="copy-icon">📋</span><span class="copy-text">Copy</span></button>
+            <div class="row gy-4 align-items-center">
+                <div class="col-md-4 text-center">
+                    <div class="about-image">
+                        <img src="assets/images/profile.jpg" alt="Gnana Prakash Gajula" class="img-fluid rounded shadow" style="max-height: 440px; object-fit: cover; width: 100%;">
                     </div>
-                    <pre><code>EventCode=4625 Type=Audit Failure User=finance_user01 WorkstationName=WS-LAB-04
-SubStatus=0xC000006A (Bad Password) LogonType=3 IpAddress=192.168.10.45
-EventCode=4625 Type=Audit Failure User=finance_user02 WorkstationName=WS-LAB-04
-SubStatus=0xC000006A (Bad Password) LogonType=3 IpAddress=192.168.10.45
-... [58 additional failed attempts across sequential accounts] ...
-EventCode=4624 Type=Audit Success User=finance_user03 WorkstationName=WS-LAB-04
-LogonType=3 IpAddress=192.168.10.45 TargetOutboundUserName=finance_user03</code></pre>
-                  </div>
                 </div>
-
-                <div class="report-section">
-                  <h4>6. Investigation Steps</h4>
-                  <ol class="report-steps-list">
-                    <li>Executed SPL query
-                      <code>index=windows EventCode=4625 | stats count by TargetUserName, IpAddress, SubStatus | sort - count</code>
-                      to isolate the attacker's source IP and targeted accounts.
-                    </li>
-                    <li>Queried for <code>EventCode 4624</code> from <code>192.168.10.45</code> within the subsequent
-                      30-minute window to check for successful authentications following the failed attempts.</li>
-                    <li>Identified that after 64 failed logons, user <code>finance_user03</code> logged in successfully
-                      via Logon Type 3.</li>
-                    <li>Pivoted to endpoint telemetry on <code>WS-LAB-04</code> to inspect running processes, uncovering
-                      a test automated script generating authentication requests.</li>
-                  </ol>
-                </div>
-
-                <div class="report-section">
-                  <h4>7. Findings</h4>
-                  <ul class="report-findings-list">
-                    <li>Confirmed a simulated horizontal password-spray attack executed against domain accounts from
-                      internal workstation <code>WS-LAB-04</code>.</li>
-                    <li>Target account <code>finance_user03</code> utilized a common password that was successfully
-                      guessed, resulting in unauthorized network logon.</li>
-                  </ul>
-                </div>
-
-                <div class="report-section">
-                  <h4>8. Relevant MITRE ATT&CK Techniques</h4>
-                  <div class="mitre-tags">
-                    <span class="mitre-tag"><code>T1110.003</code> Brute Force: Password Spraying</span>
-                    <span class="mitre-tag"><code>T1078.002</code> Valid Accounts: Domain Accounts</span>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>9. Recommended Remediation</h4>
-                  <ul class="report-remediation-list">
-                    <li>Immediately terminate active sessions and enforce password reset for
-                      <code>finance_user03</code>.
-                    </li>
-                    <li>Enforce domain-wide smart lockout policies to prevent distributed password spray techniques.
-                    </li>
-                    <li>Mandate Multi-Factor Authentication (MFA) on all internal service access.</li>
-                    <li>Isolate host <code>WS-LAB-04</code> to conduct malware hygiene and unauthorized tooling
-                      inspection.</li>
-                  </ul>
-                </div>
-
-                <div class="report-section report-conclusion">
-                  <h4>10. Conclusion</h4>
-                  <p>The simulated attack demonstrated the vital importance of correlating failed authentication spikes
-                    with subsequent successful logins. Immediate triage and account credential containment neutralized
-                    lateral movement risk before privilege escalation could occur.</p>
-                </div>
-              </div>
-            </details>
-          </article>
-
-          <!-- Case Study 2 -->
-          <article class="card case-card">
-            <div class="case-card-header">
-              <div class="case-badge-group">
-                <span class="case-number">CASE #02</span>
-              </div>
-              <span class="case-domain-tag">Network Forensics & C2</span>
-            </div>
-
-            <h3 class="case-title">Suspicious Network Traffic</h3>
-            <p class="case-summary">
-              Investigation of repetitive, beacon-like HTTP POST transmissions from an internal endpoint to an
-              unclassified external IP address, exhibiting fixed 60-second intervals.
-            </p>
-
-            <div class="case-meta-preview">
-              <div class="case-meta-item">
-                <span class="case-meta-label">Primary Tool:</span>
-                <span class="case-meta-val">Wireshark / tcpdump</span>
-              </div>
-              <div class="case-meta-item">
-                <span class="case-meta-label">MITRE ATT&CK:</span>
-                <span class="case-meta-val">T1071.001 (Web Protocols)</span>
-              </div>
-            </div>
-
-            <!-- Expandable Full Report -->
-            <details class="case-details">
-              <summary>
-                <span class="summary-text">Read Full Investigation Report</span>
-                <span class="summary-icon"></span>
-              </summary>
-              <div class="case-report-body">
-                <div class="report-section">
-                  <h4>1. Scenario</h4>
-                  <p>In a simulated enterprise subnet, an egress monitoring alert flagged continuous, non-interactive
-                    HTTP connections from endpoint <code>10.0.2.15</code> communicating with an external listener at
-                    <code>198.51.100.23</code> on port 80.
-                  </p>
-                </div>
-
-                <div class="report-section">
-                  <h4>2. Investigation Objective</h4>
-                  <p>Perform deep packet inspection on the captured PCAP trace, extract payload artifacts, determine if
-                    sensitive data or host metadata was exfiltrated, and characterize the C2 profile.</p>
-                </div>
-
-                <div class="report-section">
-                  <h4>3. Evidence Reviewed</h4>
-                  <p>Full packet captures (<code>.pcap</code>), firewall egress state logs, DNS resolver transaction
-                    records, and Sysmon Process Network Connection events (Event ID 3).</p>
-                </div>
-
-                <div class="report-section">
-                  <h4>4. Tools Used</h4>
-                  <div class="tools-tags">
-                    <span class="tool-tag">Wireshark</span>
-                    <span class="tool-tag">tcpdump</span>
-                    <span class="tool-tag">NetworkMiner</span>
-                    <span class="tool-tag">VirusTotal (Simulated)</span>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>5. Terminal Log Sample</h4>
-                  <div class="terminal-log-box">
-                    <div class="terminal-header">
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-title">wireshark-stream-dissection.pcap</span>
-                      <button class="btn-copy-log" aria-label="Copy log sample to clipboard"><span
-                          class="copy-icon">📋</span><span class="copy-text">Copy</span></button>
+                <div class="col-md-8">
+                    <div class="about-text about-content">
+                        <h3 class="mb-3">I'm a <span class="highlight">SOC Analyst & Cybersecurity Specialist</span></h3>
+                        <p class="mb-3" style="color: #1a4a80; font-size: 1.02rem;">
+                            Passionate cybersecurity defender with specialized hands-on expertise in Security Operations Center (SOC) workflows, SIEM operations (Splunk, IBM QRadar, Microsoft Sentinel), log triage, network packet analysis, and incident response frameworks (MITRE ATT&CK, NIST). Experienced across SOC internships in analyzing Windows Event Logs, Linux Syslog, and perimeter telemetry to detect, isolate, and eradicate cyber threats before business impact.
+                        </p>
+                        <div class="row personal-info">
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item">
+                                    <span class="info-title fw-bold">Name:</span>
+                                    <span class="info-value">Gnana Prakash Gajula</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item">
+                                    <span class="info-title fw-bold">Email:</span>
+                                    <span class="info-value"><a href="mailto:gajulananil604@gmail.com" class="text-decoration-none">gajulananil604@gmail.com</a></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item">
+                                    <span class="info-title fw-bold">Phone:</span>
+                                    <span class="info-value"><a href="tel:+917993089884" class="text-decoration-none">+91 7993089884</a></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item">
+                                    <span class="info-title fw-bold">Location:</span>
+                                    <span class="info-value">Bengaluru, Karnataka / Nandyal, AP</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item">
+                                    <span class="info-title fw-bold">Current Role:</span>
+                                    <span class="info-value">SOC Analyst / Threat Hunter</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item">
+                                    <span class="info-title fw-bold">Education:</span>
+                                    <span class="info-value">B.Tech CSE - AI (2022 - 2026)</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <pre><code>Frame 142: 12:04:15.102 IP 10.0.2.15.49214 > 198.51.100.23.80: Flags [P.], seq 1:318
-POST /api/telemetry/checkin HTTP/1.1
-Host: 198.51.100.23
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 94
-
-data=aG9zdG5hbWU9REVWLVRFU1QmYWNjb3VudD1sYWJfdXNlciZpcD0xMC4wLjIuMTU=
-[Decoded Base64: hostname=DEV-TEST&account=lab_user&ip=10.0.2.15]</code></pre>
-                  </div>
                 </div>
-
-                <div class="report-section">
-                  <h4>6. Investigation Steps</h4>
-                  <ol class="report-steps-list">
-                    <li>Filtered the PCAP trace using Wireshark display filter
-                      <code>http.request.method == "POST" && ip.dst == 198.51.100.23</code>.
-                    </li>
-                    <li>Calculated delta timestamps between sequential packets, identifying a rigid 60-second beacon
-                      frequency without randomized jitter.</li>
-                    <li>Reconstructed the TCP stream for frame 142 to extract and decode the base64-encoded query
-                      parameters.</li>
-                    <li>Cross-referenced Sysmon Event ID 3 on endpoint <code>10.0.2.15</code>, linking the network
-                      socket to an unauthorized PowerShell process executing a hidden background loop.</li>
-                  </ol>
-                </div>
-
-                <div class="report-section">
-                  <h4>7. Findings</h4>
-                  <ul class="report-findings-list">
-                    <li>The endpoint was running a simulated Command & Control agent transmitting basic discovery
-                      telemetry to an external server.</li>
-                    <li>No proprietary intellectual property or credentials had been exfiltrated beyond initial host
-                      identification metrics.</li>
-                  </ul>
-                </div>
-
-                <div class="report-section">
-                  <h4>8. Relevant MITRE ATT&CK Techniques</h4>
-                  <div class="mitre-tags">
-                    <span class="mitre-tag"><code>T1071.001</code> Web Protocols (HTTP)</span>
-                    <span class="mitre-tag"><code>T1041</code> Exfiltration Over C2 Channel</span>
-                    <span class="mitre-tag"><code>T1082</code> System Information Discovery</span>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>9. Recommended Remediation</h4>
-                  <ul class="report-remediation-list">
-                    <li>Implement perimeter firewall block rules targeting <code>198.51.100.23</code> and blackhole the
-                      associated domain.</li>
-                    <li>Isolate host <code>10.0.2.15</code>, terminate the unauthorized PowerShell process tree, and
-                      remove the scheduled startup task.</li>
-                    <li>Enforce strict outbound HTTP proxy authentication and inspect SSL/TLS traffic for abnormal
-                      beaconing.</li>
-                  </ul>
-                </div>
-
-                <div class="report-section report-conclusion">
-                  <h4>10. Conclusion</h4>
-                  <p>Deep packet analysis and timing delta evaluation successfully exposed simulated C2 beaconing.
-                    Payload de-obfuscation confirmed initial reconnaissance telemetry, enabling rapid perimeter blocking
-                    and endpoint isolation.</p>
-                </div>
-              </div>
-            </details>
-          </article>
-
-          <!-- Case Study 3 -->
-          <article class="card case-card">
-            <div class="case-card-header">
-              <div class="case-badge-group">
-                <span class="case-number">CASE #03</span>
-              </div>
-              <span class="case-domain-tag">Perimeter & Reconnaissance</span>
             </div>
-
-            <h3 class="case-title">Port Scanning Activity</h3>
-            <p class="case-summary">
-              Investigation of an IDS offense flagging high-volume sequential TCP SYN probes targeting a virtual DMZ
-              application server across multiple port ranges.
-            </p>
-
-            <div class="case-meta-preview">
-              <div class="case-meta-item">
-                <span class="case-meta-label">Primary Tool:</span>
-                <span class="case-meta-val">IBM QRadar / Snort IDS</span>
-              </div>
-              <div class="case-meta-item">
-                <span class="case-meta-label">MITRE ATT&CK:</span>
-                <span class="case-meta-val">T1046 (Network Service Discovery)</span>
-              </div>
-            </div>
-
-            <!-- Expandable Full Report -->
-            <details class="case-details">
-              <summary>
-                <span class="summary-text">Read Full Investigation Report</span>
-                <span class="summary-icon"></span>
-              </summary>
-              <div class="case-report-body">
-                <div class="report-section">
-                  <h4>1. Scenario</h4>
-                  <p>In a simulated lab DMZ, an intrusion detection system (Snort) coupled with IBM QRadar flagged an
-                    internal host (<code>192.168.1.105</code>) initiating rapid connection requests to server
-                    <code>192.168.1.200</code> across ports 1 through 1024.
-                  </p>
-                </div>
-
-                <div class="report-section">
-                  <h4>2. Investigation Objective</h4>
-                  <p>Confirm the port scan methodology (SYN stealth vs. connect), determine which service ports
-                    responded with SYN-ACK, evaluate exposure risk, and verify host authorization.</p>
-                </div>
-
-                <div class="report-section">
-                  <h4>3. Evidence Reviewed</h4>
-                  <p>Snort IDS alerts (<code>ET SCAN Potential Nmap SYN Scan</code>), IBM QRadar flow data (QFlow),
-                    firewall accept/drop logs, and server access journals.</p>
-                </div>
-
-                <div class="report-section">
-                  <h4>4. Tools Used</h4>
-                  <div class="tools-tags">
-                    <span class="tool-tag">IBM QRadar SIEM</span>
-                    <span class="tool-tag">AQL</span>
-                    <span class="tool-tag">Snort IDS</span>
-                    <span class="tool-tag">Wireshark</span>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>5. Terminal Log Sample</h4>
-                  <div class="terminal-log-box">
-                    <div class="terminal-header">
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-title">snort-alert-aggregation.log</span>
-                      <button class="btn-copy-log" aria-label="Copy log sample to clipboard"><span
-                          class="copy-icon">📋</span><span class="copy-text">Copy</span></button>
-                    </div>
-                    <pre><code>[**] [1:2000537:8] ET SCAN Potential Nmap SYN Scan [**]
-[Classification: Attempted Information Leak] [Priority: 2]
-10/24-14:22:01.104 192.168.1.105:54210 -> 192.168.1.200:21 TCP TTL:64 Flags: [S]
-10/24-14:22:01.105 192.168.1.105:54211 -> 192.168.1.200:22 TCP TTL:64 Flags: [S]
-10/24-14:22:01.106 192.168.1.105:54212 -> 192.168.1.200:80 TCP TTL:64 Flags: [S]
-10/24-14:22:01.107 192.168.1.200:80 -> 192.168.1.105:54212 TCP TTL:64 Flags: [S.]
-10/24-14:22:01.108 192.168.1.105:54212 -> 192.168.1.200:80 TCP TTL:64 Flags: [R]</code></pre>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>6. Investigation Steps</h4>
-                  <ol class="report-steps-list">
-                    <li>Triaged the QRadar offense, running an AQL query:
-                      <code>SELECT sourceip, destinationport, count(*) FROM events WHERE sourceip='192.168.1.105' GROUP BY destinationport ORDER BY count(*) DESC</code>.
-                    </li>
-                    <li>Analyzed the TCP flag sequence in packet logs: observing SYN packets immediately followed by RST
-                      upon receiving SYN-ACK on open ports, confirming an intentional Nmap half-open stealth scan
-                      (<code>-sS</code>).</li>
-                    <li>Mapped target responses: server <code>192.168.1.200</code> acknowledged ports 80 (HTTP) and 443
-                      (HTTPS), while all other requests received RST/ACK closures.</li>
-                    <li>Contacted asset management to correlate <code>192.168.1.105</code>, determining it belonged to
-                      an unapproved device in the testing network.</li>
-                  </ol>
-                </div>
-
-                <div class="report-section">
-                  <h4>7. Findings</h4>
-                  <ul class="report-findings-list">
-                    <li>Confirmed an unauthorized network reconnaissance scan mapping open services on server
-                      <code>192.168.1.200</code>.
-                    </li>
-                    <li>No exploitation attempt or secondary vulnerability probing occurred following the initial
-                      reconnaissance.</li>
-                  </ul>
-                </div>
-
-                <div class="report-section">
-                  <h4>8. Relevant MITRE ATT&CK Techniques</h4>
-                  <div class="mitre-tags">
-                    <span class="mitre-tag"><code>T1046</code> Network Service Discovery</span>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>9. Recommended Remediation</h4>
-                  <ul class="report-remediation-list">
-                    <li>Enforce network access control (NAC) to prevent unauthenticated physical or virtual hosts from
-                      joining internal subnets.</li>
-                    <li>Implement stateful firewall ACLs blocking internal subnets from directly enumerating server
-                      infrastructure.</li>
-                    <li>Configure automated rate-limiting thresholds to drop and alert on high-frequency TCP SYN bursts.
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="report-section report-conclusion">
-                  <h4>10. Conclusion</h4>
-                  <p>Early-stage detection of network reconnaissance via IDS correlation enabled prompt identification
-                    of an unauthorized scanning host, preventing further targeted exploitation against exposed web
-                    ports.</p>
-                </div>
-              </div>
-            </details>
-          </article>
-
-          <!-- Case Study 4 -->
-          <article class="card case-card">
-            <div class="case-card-header">
-              <div class="case-badge-group">
-                <span class="case-number">CASE #04</span>
-              </div>
-              <span class="case-domain-tag">Host Hardening & Privilege Audit</span>
-            </div>
-
-            <h3 class="case-title">Unusual Linux Privilege Activity</h3>
-            <p class="case-summary">
-              Investigation of an auditd alert on an Ubuntu server where a service account invoked root commands via
-              misconfigured sudoers permissions and spawned an interactive shell.
-            </p>
-
-            <div class="case-meta-preview">
-              <div class="case-meta-item">
-                <span class="case-meta-label">Primary Tool:</span>
-                <span class="case-meta-val">Linux CLI / Auditd / Wazuh</span>
-              </div>
-              <div class="case-meta-item">
-                <span class="case-meta-label">MITRE ATT&CK:</span>
-                <span class="case-meta-val">T1548.003 (Sudo Caching)</span>
-              </div>
-            </div>
-
-            <!-- Expandable Full Report -->
-            <details class="case-details">
-              <summary>
-                <span class="summary-text">Read Full Investigation Report</span>
-                <span class="summary-icon"></span>
-              </summary>
-              <div class="case-report-body">
-                <div class="report-section">
-                  <h4>1. Scenario</h4>
-                  <p>In a Linux hardening lab, system audit logs flagged execution of elevated administrative commands
-                    by standard web service account <code>www-data</code> (UID 33), escaping restricted privileges into
-                    an interactive root shell.</p>
-                </div>
-
-                <div class="report-section">
-                  <h4>2. Investigation Objective</h4>
-                  <p>Trace the privilege escalation vector, determine how the service account obtained root permissions,
-                    audit executed shell commands, and remediate the configuration flaw.</p>
-                </div>
-
-                <div class="report-section">
-                  <h4>3. Evidence Reviewed</h4>
-                  <p>Linux authentication logs (<code>/var/log/auth.log</code>), <code>auditd</code> system records
-                    (<code>type=EXECVE</code>), <code>/etc/sudoers</code> policy definitions, and bash history files.
-                  </p>
-                </div>
-
-                <div class="report-section">
-                  <h4>4. Tools Used</h4>
-                  <div class="tools-tags">
-                    <span class="tool-tag">Linux CLI</span>
-                    <span class="tool-tag">auditd / ausearch</span>
-                    <span class="tool-tag">Wazuh EDR</span>
-                    <span class="tool-tag">Bash</span>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>5. Terminal Log Sample</h4>
-                  <div class="terminal-log-box">
-                    <div class="terminal-header">
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-dot"></span>
-                      <span class="terminal-title">auth-auditd-execution.log</span>
-                      <button class="btn-copy-log" aria-label="Copy log sample to clipboard"><span
-                          class="copy-icon">📋</span><span class="copy-text">Copy</span></button>
-                    </div>
-                    <pre><code>Oct 28 16:30:12 srv-linux-lab sudo: pam_unix(sudo:session): session opened for user root by (uid=33)
-Oct 28 16:30:12 srv-linux-lab sudo:  www-data : TTY=unknown ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/find / -name test -exec /bin/sh \;
-Oct 28 16:30:45 srv-linux-lab auditd[1042]: type=EXECVE msg=audit(1698510645.102:412): argc=1 a0="/bin/sh"
-Oct 28 16:30:52 srv-linux-lab auditd[1042]: type=EXECVE msg=audit(1698510652.180:413): argc=2 a0="cat" a1="/etc/shadow"</code></pre>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>6. Investigation Steps</h4>
-                  <ol class="report-steps-list">
-                    <li>Inspected <code>/var/log/auth.log</code> for recent <code>sudo:</code> events associated with
-                      UID 33 (<code>www-data</code>).</li>
-                    <li>Audited <code>/etc/sudoers</code>, identifying an insecure wildcard rule:
-                      <code>www-data ALL=(ALL) NOPASSWD: /usr/bin/find</code>.
-                    </li>
-                    <li>Queried system audit records using <code>ausearch -m execve -ts today</code> to reconstruct
-                      commands executed inside the spawned root session, identifying reads to <code>/etc/shadow</code>.
-                    </li>
-                    <li>Verified that no persistent backdoors, SSH keys, or secondary accounts were added to the system.
-                    </li>
-                  </ol>
-                </div>
-
-                <div class="report-section">
-                  <h4>7. Findings</h4>
-                  <ul class="report-findings-list">
-                    <li>The service account successfully bypassed privilege boundaries using a known GTFOBins technique
-                      via <code>find -exec /bin/sh</code> granted by an over-permissive sudoers configuration.</li>
-                    <li>The simulated attacker inspected sensitive shadow password hashes but had not yet modified files
-                      or established persistence.</li>
-                  </ul>
-                </div>
-
-                <div class="report-section">
-                  <h4>8. Relevant MITRE ATT&CK Techniques</h4>
-                  <div class="mitre-tags">
-                    <span class="mitre-tag"><code>T1548.003</code> Abuse Elevation Control Mechanism: Sudo and Sudo
-                      Caching</span>
-                    <span class="mitre-tag"><code>T1068</code> Exploitation for Privilege Escalation</span>
-                  </div>
-                </div>
-
-                <div class="report-section">
-                  <h4>9. Recommended Remediation</h4>
-                  <ul class="report-remediation-list">
-                    <li>Remove the dangerous <code>NOPASSWD: /usr/bin/find</code> directive from
-                      <code>/etc/sudoers</code> using <code>visudo</code>.
-                    </li>
-                    <li>Ensure web service accounts possess non-interactive shells (<code>/usr/sbin/nologin</code>).
-                    </li>
-                    <li>Enforce system-wide password rotation for all accounts stored in <code>/etc/shadow</code>.</li>
-                    <li>Implement Wazuh EDR alerting for shell spawning from non-privileged service daemon parent
-                      processes.</li>
-                  </ul>
-                </div>
-
-                <div class="report-section report-conclusion">
-                  <h4>10. Conclusion</h4>
-                  <p>Auditing system execution logs rapidly traced privilege escalation to an over-permissive sudo
-                    entry. Revoking the misconfiguration, auditing shadow access, and enforcing least-privilege
-                    principles restored system integrity.</p>
-                </div>
-              </div>
-            </details>
-          </article>
         </div>
-      </div>
     </section>
 
-    <!-- Certifications & Learning Timeline Section -->
-    <section class="certifications section" id="certifications">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow">Professional Development</span>
-          <h2 class="section-title">Certifications & Training</h2>
-          <div class="section-divider"></div>
-          <p class="section-subtitle">
-            Verified certifications in Cybersecurity, Networking, and Systems, combined with structured SOC operational
-            training and practical defensive labs.
-          </p>
+    <!-- Education Section -->
+    <section id="education" class="education py-5">
+        <div class="container">
+            <div class="section-heading">
+                <h2>My Education</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="timeline">
+                        <div class="timeline-item mb-5 row">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="timeline-badge bg-primary">
+                                    <i class="fas fa-graduation-cap text-white"></i>
+                                </div>
+                                <div class="timeline-date">
+                                    <h5 class="mb-0">2022 - 2026</h5>
+                                    <span class="badge bg-primary text-white mt-1">CGPA: 7.25 / 10</span>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="timeline-panel card shadow-sm p-4 bg-white">
+                                    <div class="timeline-heading">
+                                        <h4 class="text-primary fw-bold">Bachelor of Technology</h4>
+                                        <h5 class="text-muted">Computer Science and Engineering (Artificial Intelligence)</h5>
+                                    </div>
+                                    <div class="timeline-body mt-2">
+                                        <p class="mb-1 text-secondary"><strong>Institution:</strong> SVR Engineering College, Nandyal</p>
+                                        <p class="mb-0 text-muted">Focused on Cybersecurity, Computer Networks, Operating Systems, Machine Learning, and Information Security architectures.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item mb-5 row">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="timeline-badge bg-primary">
+                                    <i class="fas fa-school text-white"></i>
+                                </div>
+                                <div class="timeline-date">
+                                    <h5 class="mb-0">2020 - 2022</h5>
+                                    <span class="badge bg-primary text-white mt-1">Score: 66.8%</span>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="timeline-panel card shadow-sm p-4 bg-white">
+                                    <div class="timeline-heading">
+                                        <h4 class="text-primary fw-bold">Intermediate Education</h4>
+                                        <h5 class="text-muted">MPC (Mathematics, Physics, Chemistry)</h5>
+                                    </div>
+                                    <div class="timeline-body mt-2">
+                                        <p class="mb-1 text-secondary"><strong>Institution:</strong> Sri Chaitanya Junior College, Kurnool</p>
+                                        <p class="mb-0 text-muted">Rigorous foundation in analytical problem solving, logical reasoning, mathematics, and science.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item row">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="timeline-badge bg-primary">
+                                    <i class="fas fa-book text-white"></i>
+                                </div>
+                                <div class="timeline-date">
+                                    <h5 class="mb-0">2019 - 2020</h5>
+                                    <span class="badge bg-primary text-white mt-1">CGPA: 9.3 / 10</span>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="timeline-panel card shadow-sm p-4 bg-white">
+                                    <div class="timeline-heading">
+                                        <h4 class="text-primary fw-bold">Secondary School Certificate (SSC)</h4>
+                                        <h5 class="text-muted">General Education</h5>
+                                    </div>
+                                    <div class="timeline-body mt-2">
+                                        <p class="mb-1 text-secondary"><strong>Institution:</strong> Priya Cement High School</p>
+                                        <p class="mb-0 text-muted">Completed secondary education with distinction and academic honors.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="timeline-container">
-          <!-- 1. Cybersecurity Essentials -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <span class="timeline-dot"></span>
-              <div class="timeline-connector"></div>
+    <!-- Experience / Internship Section -->
+    <section id="internship" class="internship py-5">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Experience & Internships</h2>
+                <span class="section-line"></span>
             </div>
-            <div class="card timeline-card">
-              <div class="timeline-card-header">
-                <div class="timeline-badge-group">
-                  <span class="cert-category">Certification</span>
+            <div class="row g-4 justify-content-center">
+                <!-- Cartel Software -->
+                <div class="col-lg-6">
+                    <div class="internship-card card shadow-sm h-100 bg-white border-0">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="internship-logo bg-primary text-white rounded-circle p-3 me-3 d-flex align-items-center justify-content-center" style="width: 55px; height: 55px;">
+                                    <i class="fas fa-shield-alt fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="mb-1 fw-bold text-primary">SOC Analyst Intern</h4>
+                                    <span class="text-secondary fw-semibold">Cartel Software Corp &bull; Bengaluru, India</span>
+                                    <div class="text-muted small">2024 - Present</div>
+                                </div>
+                            </div>
+                            <ul class="internship-responsibilities list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Monitored real-time security events using SIEM (Splunk) to triage anomalies, brute-force patterns, and privilege escalations.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Conducted log correlation across Windows Event Logs (Sysmon, Security), Linux Syslog, and perimeter firewalls.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Executed incident response playbooks, documented forensic ticket lifecycle, and validated false positives.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Integrated threat intelligence feeds (VirusTotal, AlienVault OTX) for automated indicator enrichment.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <span class="timeline-org">Cisco Networking Academy</span>
-              </div>
-              <h3 class="timeline-title">Cybersecurity Essentials</h3>
-              <p class="timeline-desc">
-                Comprehensive grounding in defensive cybersecurity principles, threat landscape navigation, common
-                attack vectors,
-                confidentiality, integrity, and availability (CIA) triaging, risk mitigation, and foundational security
-                controls across
-                networks and endpoints.
-              </p>
-              <div class="timeline-tags">
-                <span class="tool-tag">Threat Defense</span>
-                <span class="tool-tag">Security Principles</span>
-                <span class="tool-tag">Vulnerability Assessment</span>
-                <span class="tool-tag">Defensive Controls</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- 2. Networking Basics -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <span class="timeline-dot"></span>
-              <div class="timeline-connector"></div>
-            </div>
-            <div class="card timeline-card">
-              <div class="timeline-card-header">
-                <div class="timeline-badge-group">
-                  <span class="cert-category">Certification</span>
+                <!-- CyArt Tech -->
+                <div class="col-lg-6">
+                    <div class="internship-card card shadow-sm h-100 bg-white border-0">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="internship-logo bg-primary text-white rounded-circle p-3 me-3 d-flex align-items-center justify-content-center" style="width: 55px; height: 55px;">
+                                    <i class="fas fa-user-secret fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="mb-1 fw-bold text-primary">Cyber Security Intern</h4>
+                                    <span class="text-secondary fw-semibold">CyArt Tech &bull; Remote</span>
+                                    <div class="text-muted small">2024</div>
+                                </div>
+                            </div>
+                            <ul class="internship-responsibilities list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Performed automated vulnerability scans using Nessus and active network discovery with Nmap.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Audited system configurations and drafted baseline hardening checklists adhering to CIS Benchmarks.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Researched adversary TTPs, mapping attack progressions to the MITRE ATT&CK Enterprise matrix.</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Authored actionable vulnerability remediation guides for IT administrators to patch high-severity CVEs.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <span class="timeline-org">Cisco Networking Academy</span>
-              </div>
-              <h3 class="timeline-title">Networking Basics</h3>
-              <p class="timeline-desc">
-                Core networking concepts covering the OSI reference model, TCP/IP protocol suite, IPv4/IPv6 addressing,
-                subnetting, routing and switching fundamentals, packet flow analysis, and protocol troubleshooting (DNS,
-                DHCP, HTTP/S, SSH).
-              </p>
-              <div class="timeline-tags">
-                <span class="tool-tag">TCP/IP Protocols</span>
-                <span class="tool-tag">OSI Model</span>
-                <span class="tool-tag">Packet Flow</span>
-                <span class="tool-tag">Network Architecture</span>
-                <span class="tool-tag">Subnetting</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- 3. IT Support Essentials -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <span class="timeline-dot"></span>
-              <div class="timeline-connector"></div>
-            </div>
-            <div class="card timeline-card">
-              <div class="timeline-card-header">
-                <div class="timeline-badge-group">
-                  <span class="cert-category">Certification</span>
+                <!-- AWS Cloud Computing Intern -->
+                <div class="col-lg-12 mt-4">
+                    <div class="card shadow-sm p-4 bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-md-3 text-center mb-3 mb-md-0">
+                                <img src="GAJULA GNANA PRAKASH CLOUD INTERNSHIP_page-0001.jpg" alt="AWS Cloud Internship Certificate" class="img-fluid rounded shadow-sm" style="max-height: 180px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#certificateModal" data-certificate="GAJULA GNANA PRAKASH CLOUD INTERNSHIP_page-0001.jpg">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="internship-logo bg-primary text-white rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                        <i class="fab fa-aws fa-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="mb-0 fw-bold text-primary">AWS - Cloud Computing & Security Intern</h4>
+                                        <span class="text-muted">Cloud Infrastructure Security &bull; 2024</span>
+                                    </div>
+                                </div>
+                                <p class="text-secondary mb-3">
+                                    Architected cloud resource security groups, configured IAM roles with least privilege access, managed encrypted S3 storage buckets, and monitored CloudWatch logs for access anomalies.
+                                </p>
+                                <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#certificateModal" data-certificate="GAJULA GNANA PRAKASH CLOUD INTERNSHIP_page-0001.jpg">
+                                    <i class="fas fa-certificate me-2"></i>View Internship Certificate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <span class="timeline-org">IT Support & Systems</span>
-              </div>
-              <h3 class="timeline-title">IT Support Essentials</h3>
-              <p class="timeline-desc">
-                Practical foundations in IT infrastructure, operating system administration (Windows & Linux), hardware
-                and software
-                troubleshooting, user account configuration, directory services, and endpoint diagnostics essential for
-                triage and investigation.
-              </p>
-              <div class="timeline-tags">
-                <span class="tool-tag">Windows Administration</span>
-                <span class="tool-tag">Linux Essentials</span>
-                <span class="tool-tag">Hardware & OS</span>
-                <span class="tool-tag">Troubleshooting</span>
-                <span class="tool-tag">Endpoint Support</span>
-              </div>
             </div>
-          </div>
-
-          <!-- 4. SOC Analyst Training -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <span class="timeline-dot"></span>
-              <div class="timeline-connector"></div>
-            </div>
-            <div class="card timeline-card">
-              <div class="timeline-card-header">
-                <div class="timeline-badge-group">
-                  <span class="cert-category">Specialized Training</span>
-                </div>
-                <span class="timeline-org">SOC Analyst Curriculum</span>
-              </div>
-              <h3 class="timeline-title">Hands-On SOC Operations & SIEM Training</h3>
-              <p class="timeline-desc">
-                Intensive training focused on frontline Security Operations Center workflows: log telemetry ingestion,
-                alert triage, SPL query development in Splunk, IBM QRadar offense handling, and endpoint detection and
-                response (EDR).
-              </p>
-              <div class="timeline-tags">
-                <span class="tool-tag">Splunk Enterprise</span>
-                <span class="tool-tag">IBM QRadar</span>
-                <span class="tool-tag">Alert Triage</span>
-                <span class="tool-tag">Incident Response</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5. Practical Labs & Simulation -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <span class="timeline-dot"></span>
-            </div>
-            <div class="card timeline-card">
-              <div class="timeline-card-header">
-                <div class="timeline-badge-group">
-                  <span class="cert-category">Practical Platforms</span>
-                </div>
-                <span class="timeline-org">Blue Team Simulation</span>
-              </div>
-              <h3 class="timeline-title">Defensive Security Labs & Threat Simulation</h3>
-              <p class="timeline-desc">
-                Continuous hands-on threat investigation exercises across platforms including TryHackMe (SOC Level 1
-                Path),
-                Sysmon telemetry correlation, Windows Event ID analysis (4624, 4625, 4104), and MITRE ATT&CK framework
-                mapping.
-              </p>
-              <div class="timeline-tags">
-                <span class="tool-tag">TryHackMe</span>
-                <span class="tool-tag">Sysmon</span>
-                <span class="tool-tag">Windows Event IDs</span>
-                <span class="tool-tag">MITRE ATT&CK</span>
-                <span class="tool-tag">VirusTotal</span>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills py-5">
+        <div class="container">
+            <div class="section-heading">
+                <h2>My Skills</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="skill-category">
+                        <h3 class="mb-4"><i class="fas fa-laptop-code me-2"></i>Technical SOC Skills</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">SIEM & Log Correlation (Splunk, QRadar, Sentinel)</p>
+                                    <p class="skill-percentage">92%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 92%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">Network & Packet Analysis (Wireshark, Zeek)</p>
+                                    <p class="skill-percentage">88%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">Threat Hunting & MITRE ATT&CK Mapping</p>
+                                    <p class="skill-percentage">90%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">Threat Intelligence & OSINT (VirusTotal, AlienVault)</p>
+                                    <p class="skill-percentage">86%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 86%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">Security Scripting (Python, PowerShell, Bash)</p>
+                                    <p class="skill-percentage">84%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 84%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="skill-category">
+                        <h3 class="mb-4"><i class="fas fa-user-check me-2"></i>Professional & Operational Competencies</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">Incident Triage & Root Cause Analysis</p>
+                                    <p class="skill-percentage">94%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 94%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">Vulnerability Assessment (Nessus, Nmap)</p>
+                                    <p class="skill-percentage">88%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">Security Baseline & Hardening (CIS, NIST CSF)</p>
+                                    <p class="skill-percentage">86%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 86%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">Threat Documentation & Incident Reporting</p>
+                                    <p class="skill-percentage">92%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 92%;"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <p class="skill-name">Cross-Functional Teamwork & Communication</p>
+                                    <p class="skill-percentage">90%</p>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates py-5">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Certifications & Credentials</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="row g-4">
+                <!-- C3SA -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card h-100 certificate-item shadow-sm bg-white">
+                        <div class="certificate-image">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=500&h=300&q=80" alt="Certified Cyber Security Analyst" class="card-img-top">
+                        </div>
+                        <div class="card-body certificate-content">
+                            <h5 class="card-title fw-bold text-primary">Certified Cyber Security Analyst (C3SA)</h5>
+                            <p class="card-text text-muted small">Comprehensive validation in SOC operations, threat hunting, vulnerability management, and incident response.</p>
+                            <span class="badge bg-primary text-white">Cybersecurity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AWS Cloud -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card h-100 certificate-item shadow-sm bg-white">
+                        <div class="certificate-image">
+                            <img src="GAJULA GNANA PRAKASH CLOUD INTERNSHIP_page-0001.jpg" alt="AWS Cloud Internship Certificate" class="card-img-top">
+                        </div>
+                        <div class="card-body certificate-content">
+                            <h5 class="card-title fw-bold text-primary">AWS Cloud Computing</h5>
+                            <p class="card-text text-muted small">Internship credential in AWS cloud infrastructure, IAM access control, and storage management.</p>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#certificateModal" data-certificate="GAJULA GNANA PRAKASH CLOUD INTERNSHIP_page-0001.jpg">
+                                View Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UiPath RPA -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card h-100 certificate-item shadow-sm bg-white">
+                        <div class="certificate-image">
+                            <img src="UIPATH_page-0001.jpg" alt="UI PATH Certificate" class="card-img-top">
+                        </div>
+                        <div class="card-body certificate-content">
+                            <h5 class="card-title fw-bold text-primary">UiPath RPA Automation</h5>
+                            <p class="card-text text-muted small">Certification in Robotic Process Automation workflow design and process intelligence.</p>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#certificateModal" data-certificate="UIPATH_page-0001.jpg">
+                                View Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Excel -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card h-100 certificate-item shadow-sm bg-white">
+                        <div class="certificate-image">
+                            <img src="GAJULA GNANA PRAKASH_page-0001.jpg" alt="Advanced Excel Certificate" class="card-img-top">
+                        </div>
+                        <div class="card-body certificate-content">
+                            <h5 class="card-title fw-bold text-primary">Advanced Excel Analytics</h5>
+                            <p class="card-text text-muted small">Certification in advanced data synthesis, pivot analysis, formulas, and reporting structures.</p>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#certificateModal" data-certificate="GAJULA GNANA PRAKASH_page-0001.jpg">
+                                View Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Figma -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card h-100 certificate-item shadow-sm bg-white">
+                        <div class="certificate-image">
+                            <img src="GuviCertification - 3I29XWV36zl14u17h8 (1).png" alt="Figma UI/UX Certificate" class="card-img-top">
+                        </div>
+                        <div class="card-body certificate-content">
+                            <h5 class="card-title fw-bold text-primary">Figma UI/UX Design</h5>
+                            <p class="card-text text-muted small">GUVI certification in user interface prototyping, design systems, and workflow wireframing.</p>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#certificateModal" data-certificate="GuviCertification - 3I29XWV36zl14u17h8 (1).png">
+                                View Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cisco -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card h-100 certificate-item shadow-sm bg-white">
+                        <div class="certificate-image">
+                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=500&h=300&q=80" alt="Cisco Networking" class="card-img-top">
+                        </div>
+                        <div class="card-body certificate-content">
+                            <h5 class="card-title fw-bold text-primary">Cisco Networking & CyberOps</h5>
+                            <p class="card-text text-muted small">Network fundamentals, routing protocols, TCP/IP, OSI model, and security architecture principles.</p>
+                            <span class="badge bg-primary text-white">Networking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects py-5">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Featured Projects</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="d-flex justify-content-center mb-4">
+                <div class="btn-group project-filters">
+                    <button class="btn btn-outline-primary active" data-filter="all">All</button>
+                    <button class="btn btn-outline-primary" data-filter="siem">SIEM & Monitoring</button>
+                    <button class="btn btn-outline-primary" data-filter="tools">Security Automation</button>
+                    <button class="btn btn-outline-primary" data-filter="hunting">Threat Hunting</button>
+                </div>
+            </div>
+            <div class="row projects-container g-4">
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-6 mb-4 project-item" data-category="siem">
+                    <div class="card h-100 shadow bg-white border-0">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&h=350&q=80" alt="SOC Visibility Platform" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="card-img-overlay d-flex align-items-end project-overlay">
+                            <div class="project-info text-white w-100 p-2">
+                                <span class="badge bg-primary mb-1">SIEM & Monitoring</span>
+                                <h4 class="card-title text-white fw-bold mb-1">SOC Visibility & Detection Health Platform</h4>
+                                <p class="card-text small mb-2">Centralized monitoring solution auditing log source ingestion health, alert fidelity, and MITRE ATT&CK coverage.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/GNANAPRAKASH3131" target="_blank" class="btn btn-sm btn-light" title="View Source"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-6 mb-4 project-item" data-category="tools">
+                    <div class="card h-100 shadow bg-white border-0">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&h=350&q=80" alt="Security Baseline Checker" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="card-img-overlay d-flex align-items-end project-overlay">
+                            <div class="project-info text-white w-100 p-2">
+                                <span class="badge bg-primary mb-1">Security Automation</span>
+                                <h4 class="card-title text-white fw-bold mb-1">Security Baseline Checker</h4>
+                                <p class="card-text small mb-2">Automated multi-OS audit tool scoring Windows & Linux hosts against CIS Benchmarks with remediation scripts.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/GNANAPRAKASH3131" target="_blank" class="btn btn-sm btn-light" title="View Source"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-6 mb-4 project-item" data-category="hunting">
+                    <div class="card h-100 shadow bg-white border-0">
+                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&h=350&q=80" alt="Threat Intel Triage Bot" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="card-img-overlay d-flex align-items-end project-overlay">
+                            <div class="project-info text-white w-100 p-2">
+                                <span class="badge bg-primary mb-1">Threat Hunting</span>
+                                <h4 class="card-title text-white fw-bold mb-1">Automated Threat Intel Triage Bot</h4>
+                                <p class="card-text small mb-2">Python enrichment bot aggregating IOC reputation across VirusTotal, AbuseIPDB, and AlienVault OTX in seconds.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/GNANAPRAKASH3131" target="_blank" class="btn btn-sm btn-light" title="View Source"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="col-md-6 col-lg-6 mb-4 project-item" data-category="siem">
+                    <div class="card h-100 shadow bg-white border-0">
+                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&h=350&q=80" alt="Network Anomaly & C2 Detector" class="card-img-top" style="height: 250px; object-fit: cover;">
+                        <div class="card-img-overlay d-flex align-items-end project-overlay">
+                            <div class="project-info text-white w-100 p-2">
+                                <span class="badge bg-primary mb-1">Network Forensics</span>
+                                <h4 class="card-title text-white fw-bold mb-1">Network Traffic Anomaly & C2 Detector</h4>
+                                <p class="card-text small mb-2">Deep packet inspection pipeline flagging persistent beaconing intervals, DNS tunneling, and cleartext credential leaks.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/GNANAPRAKASH3131" target="_blank" class="btn btn-sm btn-light" title="View Source"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="case-studies" class="case-studies py-5">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Security Investigation Case Studies</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="row g-4">
+                <!-- Case 1 -->
+                <div class="col-lg-4">
+                    <div class="card h-100 case-study-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge-severity-critical">CRITICAL</span>
+                            <span class="text-muted small">Phishing & Malware</span>
+                        </div>
+                        <h4 class="fw-bold text-primary mb-2">Emotet Malspam Campaign Triage</h4>
+                        <div class="mb-3">
+                            <span class="badge-mitre">T1566.001 Phishing</span>
+                            <span class="badge-mitre">T1059.005 VBScript</span>
+                            <span class="badge-mitre">T1071.001 Web Traffic</span>
+                        </div>
+                        <p class="text-secondary small mb-3">
+                            <strong>Scenario:</strong> Inbound spear-phishing email containing a password-protected zip file bypassed legacy secure email gateway. User extracted an Excel document with malicious macros.
+                        </p>
+                        <p class="text-secondary small mb-0">
+                            <strong>SOC Investigation & Action:</strong> Identified execution of <code>wscript.exe</code> spawning <code>powershell.exe</code> with base64 encoded parameters. Extracted C2 endpoints, revoked host credentials, isolated endpoint, and pushed firewall drop rules across perimeter proxies within 12 minutes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="col-lg-4">
+                    <div class="card h-100 case-study-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge-severity-high">HIGH</span>
+                            <span class="text-muted small">Lateral Movement</span>
+                        </div>
+                        <h4 class="fw-bold text-primary mb-2">WMI Lateral Movement & Pre-Ransomware</h4>
+                        <div class="mb-3">
+                            <span class="badge-mitre">T1047 WMI</span>
+                            <span class="badge-mitre">T1078 Valid Accounts</span>
+                            <span class="badge-mitre">T1486 Data Encrypted</span>
+                        </div>
+                        <p class="text-secondary small mb-3">
+                            <strong>Scenario:</strong> Compromised workstation initiating remote WMI processes across internal finance servers during off-business hours.
+                        </p>
+                        <p class="text-secondary small mb-0">
+                            <strong>SOC Investigation & Action:</strong> Correlated Windows Event ID 4624 (Logon Type 3) and Sysmon Event ID 1 (Process Creation). Detected shadow copy deletion attempt via <code>vssadmin</code>. Terminated malicious session, applied host-level quarantine, and initiated enterprise credential reset.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Case 3 -->
+                <div class="col-lg-4">
+                    <div class="card h-100 case-study-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge-severity-medium">MEDIUM</span>
+                            <span class="text-muted small">Credential Access</span>
+                        </div>
+                        <h4 class="fw-bold text-primary mb-2">Distributed SSH & RDP Password Spray</h4>
+                        <div class="mb-3">
+                            <span class="badge-mitre">T1110.003 Password Spray</span>
+                            <span class="badge-mitre">T1110.001 Brute Force</span>
+                        </div>
+                        <p class="text-secondary small mb-3">
+                            <strong>Scenario:</strong> Multiple external IP addresses attempting low-and-slow authentication attempts against public-facing VPN and jump hosts.
+                        </p>
+                        <p class="text-secondary small mb-0">
+                            <strong>SOC Investigation & Action:</strong> Synthesized authentication failure spikes in Splunk. Identified targeting of default user accounts. Enforced dynamic geo-blocking and account lockout policies, successfully preventing unauthorized intrusion.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detection Query Library Section -->
+    <section id="query-library" class="query-library py-5">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Detection Query Library</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="row g-4">
+                <!-- Splunk SPL -->
+                <div class="col-lg-4">
+                    <div class="query-card h-100">
+                        <div class="query-card-header">
+                            <span class="fw-bold text-white"><i class="fas fa-search me-2 text-info"></i>Splunk SPL</span>
+                            <button class="copy-btn" onclick="copyQuery(this, 'code-splunk')"><i class="fas fa-copy me-1"></i>Copy</button>
+                        </div>
+                        <div class="query-card-body">
+                            <p class="text-light small mb-2">Detects encoded PowerShell executions hiding reverse shells or stagers:</p>
+                            <pre class="query-code" id="code-splunk">index=windows sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1 Image="*\powershell.exe"
+| where match(CommandLine, "(?i)-(enc|encodedcommand)\s+[A-Za-z0-9+/=]{20,}")
+| table _time, host, User, CommandLine, ParentImage</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Microsoft Sentinel KQL -->
+                <div class="col-lg-4">
+                    <div class="query-card h-100">
+                        <div class="query-card-header">
+                            <span class="fw-bold text-white"><i class="fas fa-bolt me-2 text-warning"></i>Sentinel KQL</span>
+                            <button class="copy-btn" onclick="copyQuery(this, 'code-kql')"><i class="fas fa-copy me-1"></i>Copy</button>
+                        </div>
+                        <div class="query-card-body">
+                            <p class="text-light small mb-2">Identifies repeated failed logins followed by successful authentication:</p>
+                            <pre class="query-code" id="code-kql">DeviceLogonEvents
+| where ActionType in ("LogonFailed", "LogonSuccess")
+| summarize 
+    FailedCount = countif(ActionType == "LogonFailed"),
+    SuccessCount = countif(ActionType == "LogonSuccess")
+    by AccountName, RemoteIP, bin(TimeGenerated, 15m)
+| where FailedCount >= 5 and SuccessCount >= 1</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sigma Rule -->
+                <div class="col-lg-4">
+                    <div class="query-card h-100">
+                        <div class="query-card-header">
+                            <span class="fw-bold text-white"><i class="fas fa-shield-alt me-2 text-success"></i>Sigma Rule</span>
+                            <button class="copy-btn" onclick="copyQuery(this, 'code-sigma')"><i class="fas fa-copy me-1"></i>Copy</button>
+                        </div>
+                        <div class="query-card-body">
+                            <p class="text-light small mb-2">Detects suspicious service installations often tied to persistence:</p>
+                            <pre class="query-code" id="code-sigma">title: Suspicious Service Installation
+logsource:
+    product: windows
+    service: system
+detection:
+    selection:
+        EventID: 7045
+        ImagePath|contains:
+            - '\AppData\Local\Temp\'
+            - '\Users\Public\'
+            - 'powershell'
+    condition: selection
+level: high</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="contact section" id="contact">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow">Get in Touch</span>
-          <h2 class="section-title">Contact & Inquiries</h2>
-          <div class="section-divider"></div>
-          <p class="section-subtitle">
-            Open to SOC Analyst, Threat Detection, Incident Response, and Security Operations opportunities. Let's
-            connect!
-          </p>
-        </div>
-
-        <div class="contact-grid">
-          <!-- Left Column: Contact Information Cards -->
-          <div class="contact-info-panel">
-            <div class="card contact-card">
-              <div class="contact-status-badge">
-                <span class="status-indicator"></span>
-                <span>Actively Seeking Opportunities</span>
-              </div>
-              <h3 class="contact-card-title">Let's Discuss Security Operations</h3>
-              <p class="contact-card-desc">
-                Whether you have an open SOC Analyst role, an interview inquiry, or questions regarding my hands-on
-                detection labs, feel free to reach out directly through the channels below.
-              </p>
-
-              <div class="contact-details-list">
-                <!-- Location -->
-                <div class="contact-detail-item">
-                  <span class="detail-icon">📍</span>
-                  <div class="detail-content">
-                    <span class="detail-label">Location</span>
-                    <span class="detail-val">Bengaluru, Karnataka, India</span>
-                    <span class="detail-hint">UTC +05:30 (IST) • Open to On-site, Hybrid, or Remote</span>
-                  </div>
-                </div>
-
-                <!-- Professional Email (Editable) -->
-                <div class="contact-detail-item">
-                  <span class="detail-icon">✉️</span>
-                  <div class="detail-content">
-                    <span class="detail-label">Email Address</span>
-                    <!-- Editable email address -->
-                    <a href="mailto:gnanaprakash2956@gmail.com" class="detail-link">gnanaprakash2956@gmail.com</a>
-                    <span class="detail-hint">Direct inquiry channel</span>
-                  </div>
-                </div>
-
-                <!-- Phone / WhatsApp -->
-                <div class="contact-detail-item">
-                  <span class="detail-icon">📞</span>
-                  <div class="detail-content">
-                    <span class="detail-label">Phone</span>
-                    <a href="tel:+917993089884" class="detail-link">+91 7993089884</a>
-                    <span class="detail-hint">Direct call & WhatsApp</span>
-                  </div>
-                </div>
-
-                <!-- Resume Download Item -->
-                <div class="contact-detail-item">
-                  <span class="detail-icon">📄</span>
-                  <div class="detail-content">
-                    <span class="detail-label">Curriculum Vitae</span>
-                    <a href="assets/resume/resume.pdf" class="detail-link" download="Gnana_Prakash_Gajula_Resume.pdf"
-                      target="_blank" rel="noopener noreferrer">Download Resume (PDF) ⤓</a>
-                    <span class="detail-hint">Verified SOC Analyst Resume • PDF Format</span>
-                  </div>
-                </div>
-
-                <!-- Professional Profiles (Editable URLs) -->
-                <div class="contact-detail-item">
-                  <span class="detail-icon">🌐</span>
-                  <div class="detail-content">
-                    <span class="detail-label">Professional Profiles</span>
-                    <div class="social-links-group">
-                      <!-- Editable LinkedIn URL -->
-                      <a href="https://www.linkedin.com/in/gnanaprakash-gajula/" class="social-badge-link"
-                        target="_blank" rel="noopener noreferrer">
-                        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                          <path
-                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                        </svg>
-                        <span>LinkedIn</span>
-                        <span class="link-arrow">↗</span>
-                      </a>
-                      <!-- Editable GitHub URL -->
-                      <a href="https://github.com/GNANAPRAKASH3131" class="social-badge-link" target="_blank"
-                        rel="noopener noreferrer">
-                        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                          <path
-                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                        </svg>
-                        <span>GitHub</span>
-                        <span class="link-arrow">↗</span>
-                      </a>
-                      <!-- Editable TryHackMe / Blue Team URL -->
-                      <a href="https://tryhackme.com/p/gnanaprakash2956" class="social-badge-link" target="_blank"
-                        rel="noopener noreferrer">
-                        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                          <path
-                            d="M10.875 0C10.6 0 10.375.175 10.275.425L7.025 8.775a.64.64 0 0 0 .15.675l4.7 4.7c.225.225.6.225.825 0l4.7-4.7a.64.64 0 0 0 .15-.675l-3.25-8.35A.607.607 0 0 0 13.725 0h-2.85zM4.175 9.875c-.25 0-.475.15-.575.375l-3.5 8.75c-.15.35.05.75.4.875l7.15 2.6c.3.1.65-.05.775-.35l2.4-5.975-6.65-6.275zm15.65 0l-6.65 6.275 2.4 5.975c.125.3.475.45.775.35l7.15-2.6c.35-.125.55-.525.4-.875l-3.5-8.75a.607.607 0 0 0-.575-.375z" />
-                        </svg>
-                        <span>TryHackMe</span>
-                        <span class="link-arrow">↗</span>
-                      </a>
+    <section id="contact" class="contact py-5">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Contact Me</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 mb-4">
+                    <div class="contact-info">
+                        <div class="contact-item mb-4">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="contact-icon bg-primary text-white rounded-circle p-3">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                </div>
+                                <div class="col contact-details">
+                                    <h5 class="mb-1 fw-bold text-primary">Location</h5>
+                                    <p class="mb-0 text-secondary">Bengaluru, Karnataka &bull; Nandyal, AP, India</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-item mb-4">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="contact-icon bg-primary text-white rounded-circle p-3">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                </div>
+                                <div class="col contact-details">
+                                    <h5 class="mb-1 fw-bold text-primary">Email</h5>
+                                    <p class="mb-0"><a href="mailto:gajulananil604@gmail.com" class="text-decoration-none text-secondary">gajulananil604@gmail.com</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-item mb-4">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="contact-icon bg-primary text-white rounded-circle p-3">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                </div>
+                                <div class="col contact-details">
+                                    <h5 class="mb-1 fw-bold text-primary">Phone</h5>
+                                    <p class="mb-0"><a href="tel:+917993089884" class="text-decoration-none text-secondary">+91 7993089884</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-item mb-4">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="contact-icon bg-primary text-white rounded-circle p-3">
+                                        <i class="fab fa-github"></i>
+                                    </div>
+                                </div>
+                                <div class="col contact-details">
+                                    <h5 class="mb-1 fw-bold text-primary">GitHub</h5>
+                                    <p class="mb-0"><a href="https://github.com/GNANAPRAKASH3131" target="_blank" class="text-decoration-none text-secondary">github.com/GNANAPRAKASH3131</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-item mb-4">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="contact-icon bg-primary text-white rounded-circle p-3">
+                                        <i class="fab fa-linkedin"></i>
+                                    </div>
+                                </div>
+                                <div class="col contact-details">
+                                    <h5 class="mb-1 fw-bold text-primary">LinkedIn</h5>
+                                    <p class="mb-0"><a href="https://www.linkedin.com/in/gnana-prakash-gajula" target="_blank" class="text-decoration-none text-secondary">linkedin.com/in/gnana-prakash-gajula</a></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
+                <div class="col-lg-7">
+                    <div class="contact-form p-4">
+                        <h4 class="mb-3 fw-bold text-primary">Send a Message</h4>
+                        <form id="contactForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" rows="5" class="form-control" placeholder="Your Message" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary px-4 py-2">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <!-- Right Column: Interactive Contact Form -->
-          <div class="contact-form-panel">
-            <div class="card form-card">
-              <h3 class="form-title">Send a Message</h3>
-              <p class="form-desc">Have an inquiry, role opportunity, or question? Send a message directly to my inbox.
-              </p>
-
-              <form id="contactForm" class="contact-form" novalidate>
-                <!-- Web3Forms access key – optional: replace YOUR_ACCESS_KEY with a key from https://web3forms.com, or leave as default to use FormSubmit -->
-                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
-                <input type="hidden" name="subject" value="Portfolio Contact: New Message from SOC Analyst Portfolio">
-                <input type="hidden" name="from_name" value="SOC Portfolio Contact Form">
-                <!-- Honeypot spam protection -->
-                <input type="checkbox" name="botcheck" style="display:none">
-
-                <div class="form-group">
-                  <label for="senderName" class="form-label">Name <span class="required">*</span></label>
-                  <input type="text" id="senderName" name="name" class="form-input" placeholder="Your Name" required
-                    autocomplete="name">
-                  <span class="form-error" id="nameError"></span>
-                </div>
-
-                <div class="form-group">
-                  <label for="senderEmail" class="form-label">Email <span class="required">*</span></label>
-                  <input type="email" id="senderEmail" name="email" class="form-input"
-                    placeholder="your.email@example.com" required autocomplete="email">
-                  <span class="form-error" id="emailError"></span>
-                </div>
-
-                <div class="form-group">
-                  <label for="senderMessage" class="form-label">Message <span class="required">*</span></label>
-                  <textarea id="senderMessage" name="message" class="form-textarea" rows="4"
-                    placeholder="Your message or opportunity details..." required></textarea>
-                  <span class="form-error" id="messageError"></span>
-                </div>
-
-                <div class="form-actions-row">
-                  <button type="submit" class="btn btn-primary btn-submit" id="contactSubmitBtn">
-                    <span id="submitBtnText">Send Message</span>
-                    <span class="btn-icon" id="submitBtnIcon">➤</span>
-                  </button>
-                  <a href="mailto:gnanaprakash2956@gmail.com" class="direct-email-link" id="directEmailLink">
-                    Or open in default email app ↗
-                  </a>
-                </div>
-
-                <!-- Form feedback area -->
-                <div class="form-feedback" id="formFeedback" role="alert" style="display: none;"></div>
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="#home" class="logo-link">
-            <span class="logo-monogram">GP</span>
-            <div class="logo-brand-text">
-              <span class="logo-name">Gnana Prakash Gajula</span>
-              <span class="logo-sub">SOC Analyst Portfolio</span>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0">&copy; Gnana Prakash Gajula &bull; SOC Analyst & Cybersecurity Specialist</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/gnana-prakash-gajula" target="_blank" class="text-white me-3" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/GNANAPRAKASH3131" target="_blank" class="text-white me-3" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:gajulananil604@gmail.com" class="text-white me-3" title="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+917993089884" class="text-white" title="Phone"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
             </div>
-          </a>
-          <p class="footer-tagline">Defending Digital Infrastructure Through Security Operations.</p>
         </div>
+    </footer>
 
-        <div class="footer-nav-col">
-          <h4 class="footer-col-title">Navigation</h4>
-          <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#case-studies">Case Studies</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
+    <!-- Certificate Modal -->
+    <div class="modal fade" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-primary" id="certificateModalLabel">Certificate Viewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center p-0 d-flex align-items-center justify-content-center" style="background-color: #1a2234;">
+                    <img src="" alt="Certificate" class="img-fluid" id="modalCertificateImage" style="max-height: 90vh; max-width: 95vw; object-fit: contain; margin: auto;">
+                </div>
+            </div>
         </div>
-
-        <div class="footer-social-col">
-          <h4 class="footer-col-title">Social Links</h4>
-          <div class="footer-social-links">
-            <a href="https://www.linkedin.com/in/gnanaprakash-gajula/" class="footer-social-link" target="_blank"
-              rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-              <span>LinkedIn</span>
-              <span class="link-arrow">↗</span>
-            </a>
-            <a href="https://github.com/GNANAPRAKASH3131" class="footer-social-link" target="_blank"
-              rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              <span>GitHub</span>
-              <span class="link-arrow">↗</span>
-            </a>
-            <a href="mailto:gnanaprakash2956@gmail.com" class="footer-social-link">
-              <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-              </svg>
-              <span>Email</span>
-              <span class="link-arrow">↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-divider"></div>
-
-      <div class="footer-bottom">
-        <p class="footer-credits">
-          &copy; <span id="currentYear">2026</span> Gnana Prakash Gajula | SOC Analyst Portfolio. Built with HTML5,
-          CSS3, and vanilla JavaScript.
-        </p>
-        <p class="footer-disclaimer">
-          All case studies, logs, and investigation scenarios depicted on this website are conducted within authorized,
-          isolated educational laboratory environments.
-        </p>
-      </div>
     </div>
-  </footer>
 
-  <!-- Floating Back to Top Button -->
-  <button type="button" class="btn-back-to-top" id="btnBackToTop" aria-label="Back to top" title="Back to top">
-    <span class="back-to-top-icon">↑</span>
-  </button>
-
-  <!-- Interactive Detection Query Library Modal -->
-  <div class="modal-backdrop" id="queryModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="queryModalTitle"
-    style="display:none;">
-    <div class="query-modal">
-      <div class="query-modal-header">
-        <div class="query-modal-title-group">
-          <span class="query-modal-badge">SOC Playbook</span>
-          <h3 class="query-modal-title" id="queryModalTitle">Interactive Detection Query Library</h3>
+    <!-- Resume Modal -->
+    <div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-primary" id="resumeModalLabel">Gnana Prakash Gajula - Resume</h5>
+                    <div class="ms-auto d-flex align-items-center">
+                        <a href="assets/resume/resume.pdf" class="btn btn-primary me-2" download="Gnana_Prakash_Gajula_Resume.pdf">
+                            <i class="fas fa-download me-1"></i> Download PDF
+                        </a>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="modal-body text-center p-0 d-flex align-items-center justify-content-center" style="background-color: #1a2234; overflow-y: auto;">
+                    <img src="assets/resume/Gnani_resume_preview.jpg" alt="Resume Preview" class="img-fluid my-3 shadow-lg" style="max-height: 90vh; max-width: 95vw; object-fit: contain;">
+                </div>
+            </div>
         </div>
-        <button type="button" class="btn-modal-close" id="btnCloseQueryModal"
-          aria-label="Close query library">&times;</button>
-      </div>
-
-      <div class="query-modal-controls">
-        <div class="query-tabs" role="tablist">
-          <button type="button" class="query-tab active" data-tab="splunk" role="tab" aria-selected="true">Splunk
-            SPL</button>
-          <button type="button" class="query-tab" data-tab="sysmon" role="tab" aria-selected="false">Sysmon</button>
-          <button type="button" class="query-tab" data-tab="eventids" role="tab" aria-selected="false">Windows Event
-            IDs</button>
-          <button type="button" class="query-tab" data-tab="qradar" role="tab" aria-selected="false">QRadar AQL</button>
-        </div>
-        <div class="query-search-wrapper">
-          <input type="text" id="querySearchInput" class="query-search-input"
-            placeholder="Search queries, Event IDs, techniques..." autocomplete="off">
-        </div>
-      </div>
-
-      <div class="query-modal-body" id="queryModalList">
-        <!-- Dynamically rendered & searchable query cards -->
-      </div>
-
-      <div class="query-modal-footer">
-        <span class="query-modal-hint">Click any "Copy Query" button to copy production detection syntax.</span>
-        <button type="button" class="btn btn-outline btn-sm" id="btnCloseQueryModalBottom">Close</button>
-      </div>
     </div>
-  </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
 </body>
 
 </html>
