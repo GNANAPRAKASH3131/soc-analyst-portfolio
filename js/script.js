@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const typedElement = document.querySelector('.typing');
         if (typedElement) {
             new Typed('.typing', {
-                strings: ["SOC Analyst", "Threat Detection Engineer", "Cybersecurity Specialist", "Incident Response Analyst"],
+                strings: ["Cybersecurity Specialist", "SOC Analyst", "Threat Detection Engineer", "Incident Response Analyst"],
                 typeSpeed: 80,
                 backSpeed: 50,
                 backDelay: 1500,
@@ -264,27 +264,153 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Contact Form Submission
+    // Query Library Filter & Real-Time Search
+    const queryFilterButtons = document.querySelectorAll('.query-filters button');
+    const querySearchInput = document.getElementById('querySearchInput');
+    const queryItems = document.querySelectorAll('.query-item');
+
+    function filterQueries() {
+        const activeBtn = document.querySelector('.query-filters button.active');
+        const activeFilter = activeBtn ? activeBtn.getAttribute('data-query-filter') : 'all';
+        const searchTerm = querySearchInput ? querySearchInput.value.toLowerCase().trim() : '';
+
+        queryItems.forEach(item => {
+            const category = item.getAttribute('data-category');
+            const textContent = item.textContent.toLowerCase();
+
+            const matchesCategory = (activeFilter === 'all' || category === activeFilter);
+            const matchesSearch = (!searchTerm || textContent.includes(searchTerm));
+
+            if (matchesCategory && matchesSearch) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    if (queryFilterButtons.length > 0) {
+        queryFilterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                queryFilterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                filterQueries();
+            });
+        });
+    }
+
+    if (querySearchInput) {
+        querySearchInput.addEventListener('input', filterQueries);
+    }
+
+    // Contact Form Submission with FormSubmit.co and direct inbox delivery
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        const TARGET_EMAIL = 'gnanaprakash2956@gmail.com';
+        const submitBtn = document.getElementById('contactSubmitBtn');
+        const submitBtnText = document.getElementById('submitBtnText');
+        const formFeedback = document.getElementById('formFeedback');
+        const directMailtoBtn = document.getElementById('directMailtoBtn');
+
+        const nameInput = contactForm.querySelector('[name="name"]');
+        const emailInput = contactForm.querySelector('[name="email"]');
+        const subjectInput = contactForm.querySelector('[name="subject"]');
+        const messageInput = contactForm.querySelector('[name="message"]');
+
+        function updateMailto() {
+            if (!directMailtoBtn) return;
+            const name = nameInput ? nameInput.value.trim() : '';
+            const email = emailInput ? emailInput.value.trim() : '';
+            const subject = subjectInput && subjectInput.value.trim() ? subjectInput.value.trim() : 'SOC Analyst Portfolio Inquiry';
+            const message = messageInput ? messageInput.value.trim() : '';
+            const body = `${message}\n\n---\nFrom: ${name || 'Website Visitor'}\nEmail: ${email || 'Not provided'}`;
+            directMailtoBtn.href = `mailto:${TARGET_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        if (nameInput) nameInput.addEventListener('input', updateMailto);
+        if (emailInput) emailInput.addEventListener('input', updateMailto);
+        if (subjectInput) subjectInput.addEventListener('input', updateMailto);
+        if (messageInput) messageInput.addEventListener('input', updateMailto);
+
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Get form values
-            const name = this.querySelector('[name="name"]').value;
-            const email = this.querySelector('[name="email"]').value;
-            const subject = this.querySelector('[name="subject"]').value;
-            const message = this.querySelector('[name="message"]').value;
-            
-            // Here you would normally send the data to a server
-            // For now, let's just log it to the console
-            console.log('Form submitted with:', { name, email, subject, message });
-            
-            // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
-            
-            // Reset form
-            this.reset();
+
+            const name = nameInput ? nameInput.value.trim() : '';
+            const email = emailInput ? emailInput.value.trim() : '';
+            const subject = subjectInput ? subjectInput.value.trim() : 'Portfolio Contact';
+            const message = messageInput ? messageInput.value.trim() : '';
+
+            if (!name || !email || !message) {
+                if (formFeedback) {
+                    formFeedback.style.display = 'block';
+                    formFeedback.innerHTML = '<div class="alert alert-warning mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Please fill in all required fields.</div>';
+                }
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                if (formFeedback) {
+                    formFeedback.style.display = 'block';
+                    formFeedback.innerHTML = '<div class="alert alert-warning mb-0"><i class="fas fa-exclamation-circle me-2"></i>Please enter a valid email address.</div>';
+                }
+                return;
+            }
+
+            // Disable button and show sending spinner
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                if (submitBtnText) submitBtnText.textContent = 'Sending...';
+                const icon = submitBtn.querySelector('i');
+                if (icon) icon.className = 'fas fa-spinner fa-spin me-2';
+            }
+            if (formFeedback) formFeedback.style.display = 'none';
+
+            try {
+                const response = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        _subject: `[SOC Portfolio] ${subject} - from ${name}`,
+                        message: message,
+                        _template: 'table',
+                        _captcha: 'false'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && (data.success === 'true' || data.success === true)) {
+                    if (formFeedback) {
+                        formFeedback.style.display = 'block';
+                        formFeedback.innerHTML = `<div class="alert alert-success mb-0"><i class="fas fa-check-circle me-2"></i><strong>Thank you, ${name}!</strong> Your message has been sent directly to ${TARGET_EMAIL}. I will get back to you shortly.</div>`;
+                    }
+                    contactForm.reset();
+                    updateMailto();
+                } else {
+                    throw new Error(data.message || 'Submission error');
+                }
+            } catch (err) {
+                console.warn('Direct delivery fallback:', err);
+                const mailtoUrl = `mailto:${TARGET_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message + '\n\n---\nFrom: ' + name + '\nEmail: ' + email)}`;
+                if (formFeedback) {
+                    formFeedback.style.display = 'block';
+                    formFeedback.innerHTML = `<div class="alert alert-info mb-0"><i class="fas fa-info-circle me-2"></i>Notice: Direct delivery encountered a network block. <a href="${mailtoUrl}" class="alert-link text-decoration-underline fw-bold">Click here to send directly via your mail client</a>.</div>`;
+                }
+                window.location.href = mailtoUrl;
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    if (submitBtnText) submitBtnText.textContent = 'Send Message';
+                    const icon = submitBtn.querySelector('i');
+                    if (icon) icon.className = 'fas fa-paper-plane me-2';
+                }
+            }
         });
     }
 });

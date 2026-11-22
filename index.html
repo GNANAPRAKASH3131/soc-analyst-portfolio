@@ -676,67 +676,230 @@
             <div class="section-heading">
                 <h2>Detection Query Library</h2>
                 <span class="section-line"></span>
-                <p class="text-muted mt-2">Production-ready SIEM and EDR detection rules written and validated for active adversary hunting.</p>
+                <p class="text-muted mt-2">Production-tested detection queries, hunting thresholds, and audit rules across Splunk SPL, Sysmon XML, Windows Events, and IBM QRadar AQL.</p>
             </div>
-            <div class="row g-4">
-                <!-- Splunk SPL -->
-                <div class="col-lg-4">
-                    <div class="query-card h-100">
-                        <div class="query-card-header">
-                            <span class="fw-bold text-white"><i class="fas fa-search me-2 text-info"></i>Splunk SPL</span>
-                            <button class="copy-btn" onclick="copyQuery(this, 'code-splunk')"><i class="fas fa-copy me-1"></i>Copy</button>
+
+            <!-- Query Filter Controls -->
+            <div class="d-flex flex-column align-items-center mb-4">
+                <div class="btn-group query-filters flex-wrap justify-content-center mb-3">
+                    <button class="btn btn-outline-primary active" data-query-filter="all">All Queries (10)</button>
+                    <button class="btn btn-outline-primary" data-query-filter="splunk">Splunk SPL</button>
+                    <button class="btn btn-outline-primary" data-query-filter="sysmon">Sysmon XML / SPL</button>
+                    <button class="btn btn-outline-primary" data-query-filter="eventids">Windows Event IDs</button>
+                    <button class="btn btn-outline-primary" data-query-filter="qradar">QRadar AQL</button>
+                </div>
+                <div class="w-100" style="max-width: 600px;">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-primary text-primary"><i class="fas fa-search"></i></span>
+                        <input type="text" id="querySearchInput" class="form-control" placeholder="Search queries, Event IDs, techniques (e.g. 4625, PowerShell, Sysmon)...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Queries Grid -->
+            <div class="row query-items-container">
+
+                <!-- Query: Brute-Force &amp; Password Spraying Threshold -->
+                <div class="col-lg-6 mb-4 query-item" data-category="splunk">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-search text-info me-2"></i>
+                                <span class="fw-bold text-white small">Splunk SPL</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">Event 4625 • T1110</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-splunk-1')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
                         </div>
-                        <div class="query-card-body">
-                            <p class="text-light small mb-2">Detects encoded PowerShell executions hiding reverse shells or stagers:</p>
-                            <pre class="query-code" id="code-splunk">index=windows sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1 Image="*\powershell.exe"
-| where match(CommandLine, "(?i)-(enc|encodedcommand)\s+[A-Za-z0-9+/=]{20,}")
-| table _time, host, User, CommandLine, ParentImage</pre>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">Brute-Force &amp; Password Spraying Threshold</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Detects high-frequency failed logon attempts across single or distributed user accounts from internal or perimeter IP addresses.</p>
+                            <pre class="query-code p-2 rounded" id="q-splunk-1" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">index=windows EventCode=4625 | bin _time span=5m | stats count, dc(TargetUserName) as targeted_users by src_ip | where count &gt; 10 OR targeted_users &gt; 3</pre>
                         </div>
                     </div>
                 </div>
-
-                <!-- Microsoft Sentinel KQL -->
-                <div class="col-lg-4">
-                    <div class="query-card h-100">
-                        <div class="query-card-header">
-                            <span class="fw-bold text-white"><i class="fas fa-bolt me-2 text-warning"></i>Sentinel KQL</span>
-                            <button class="copy-btn" onclick="copyQuery(this, 'code-kql')"><i class="fas fa-copy me-1"></i>Copy</button>
+                <!-- Query: Obfuscated &amp; Encoded PowerShell Execution -->
+                <div class="col-lg-6 mb-4 query-item" data-category="splunk">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-search text-info me-2"></i>
+                                <span class="fw-bold text-white small">Splunk SPL</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">Event 4104 • T1059.001</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-splunk-2')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
                         </div>
-                        <div class="query-card-body">
-                            <p class="text-light small mb-2">Identifies repeated failed logins followed by successful authentication:</p>
-                            <pre class="query-code" id="code-kql">DeviceLogonEvents
-| where ActionType in ("LogonFailed", "LogonSuccess")
-| summarize 
-    FailedCount = countif(ActionType == "LogonFailed"),
-    SuccessCount = countif(ActionType == "LogonSuccess")
-    by AccountName, RemoteIP, bin(TimeGenerated, 15m)
-| where FailedCount >= 5 and SuccessCount >= 1</pre>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">Obfuscated &amp; Encoded PowerShell Execution</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Flags base64 encoded scripts, download cradles, and execution policy bypass parameters inside PowerShell script block logs.</p>
+                            <pre class="query-code p-2 rounded" id="q-splunk-2" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">index=windows EventCode=4104 (ScriptBlockText=&quot;*-enc*&quot; OR ScriptBlockText=&quot;*-EncodedCommand*&quot; OR ScriptBlockText=&quot;*FromBase64String*&quot; OR ScriptBlockText=&quot;*DownloadString*&quot;) | table _time, Computer, ScriptBlockText</pre>
                         </div>
                     </div>
                 </div>
-
-                <!-- Sigma Rule -->
-                <div class="col-lg-4">
-                    <div class="query-card h-100">
-                        <div class="query-card-header">
-                            <span class="fw-bold text-white"><i class="fas fa-shield-alt me-2 text-success"></i>Sigma Rule</span>
-                            <button class="copy-btn" onclick="copyQuery(this, 'code-sigma')"><i class="fas fa-copy me-1"></i>Copy</button>
+                <!-- Query: Privilege Escalation via Local Group Addition -->
+                <div class="col-lg-6 mb-4 query-item" data-category="splunk">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-search text-info me-2"></i>
+                                <span class="fw-bold text-white small">Splunk SPL</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">Event 4728/4732 • T1078</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-splunk-3')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
                         </div>
-                        <div class="query-card-body">
-                            <p class="text-light small mb-2">Detects suspicious service installations often tied to persistence:</p>
-                            <pre class="query-code" id="code-sigma">title: Suspicious Service Installation
-logsource:
-    product: windows
-    service: system
-detection:
-    selection:
-        EventID: 7045
-        ImagePath|contains:
-            - '\AppData\Local\Temp\'
-            - '\Users\Public\'
-            - 'powershell'
-    condition: selection
-level: high</pre>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">Privilege Escalation via Local Group Addition</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Audits whenever a user account is granted administrative access by being added into privileged local or domain groups.</p>
+                            <pre class="query-code p-2 rounded" id="q-splunk-3" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">index=windows (EventCode=4728 OR EventCode=4732) TargetUserName=&quot;*Admin*&quot; | table _time, SubjectUserName, TargetUserName, MemberName</pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Query: Suspicious Process Spawning from %TEMP% or %APPDATA% -->
+                <div class="col-lg-6 mb-4 query-item" data-category="sysmon">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-shield-alt text-primary me-2"></i>
+                                <span class="fw-bold text-white small">Sysmon XML</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">Sysmon Event 1 • T1059</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-sysmon-1')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">Suspicious Process Spawning from %TEMP% or %APPDATA%</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Identifies executable processes originating from atypical user-writable directories commonly leveraged by droppers and payloads.</p>
+                            <pre class="query-code p-2 rounded" id="q-sysmon-1" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">&lt;QueryList&gt;
+  &lt;Query Id=&quot;0&quot; Path=&quot;Microsoft-Windows-Sysmon/Operational&quot;&gt;
+    &lt;Select Path=&quot;Microsoft-Windows-Sysmon/Operational&quot;&gt;*[System[(EventID=1)]] and *[EventData[Data[@Name=&quot;CurrentDirectory&quot;] and (contains(.,&quot;AppData&quot;) or contains(.,&quot;Temp&quot;))]]&lt;/Select&gt;
+  &lt;/Query&gt;
+&lt;/QueryList&gt;</pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Query: Abnormal Network Beaconing by Unknown Binaries -->
+                <div class="col-lg-6 mb-4 query-item" data-category="sysmon">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-shield-alt text-primary me-2"></i>
+                                <span class="fw-bold text-white small">Sysmon SPL</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">Sysmon Event 3 • T1071</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-sysmon-2')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">Abnormal Network Beaconing by Unknown Binaries</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Detects outbound connections over non-standard ports (e.g. 4444, 5555, 8080) initiated by processes outside standard browsers.</p>
+                            <pre class="query-code p-2 rounded" id="q-sysmon-2" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">index=sysmon EventCode=3 NOT (Image=&quot;*chrome.exe&quot; OR Image=&quot;*firefox.exe&quot; OR Image=&quot;*msedge.exe&quot;) DestinationPort IN (4444, 5555, 8080, 8443, 9001) | stats count by Image, DestinationIp, DestinationPort</pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Query: Masqueraded System File Creation in User Paths -->
+                <div class="col-lg-6 mb-4 query-item" data-category="sysmon">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-shield-alt text-primary me-2"></i>
+                                <span class="fw-bold text-white small">Sysmon SPL</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">Sysmon Event 11 • T1036.005</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-sysmon-3')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">Masqueraded System File Creation in User Paths</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Alerts when common Windows system file names (svchost.exe, lsass.exe, csrss.exe) are created outside C:\Windows\System32.</p>
+                            <pre class="query-code p-2 rounded" id="q-sysmon-3" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">index=sysmon EventCode=11 TargetFilename IN (&quot;*\svchost.exe&quot;, &quot;*\lsass.exe&quot;, &quot;*\taskhost.exe&quot;) NOT TargetFilename=&quot;C:\Windows\System32\*&quot; | table _time, Image, TargetFilename</pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Query: Authentication &amp; Account Lockout Monitoring -->
+                <div class="col-lg-6 mb-4 query-item" data-category="eventids">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-desktop text-info me-2"></i>
+                                <span class="fw-bold text-white small">Windows Security</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">Event 4624 / 4625 / 4740</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-eventids-1')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">Authentication &amp; Account Lockout Monitoring</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Key Windows Security log IDs: 4624 (Logon success with Type 2-Interactive, 3-Network, 10-RDP), 4625 (Failed logon), and 4740 (Account lockout).</p>
+                            <pre class="query-code p-2 rounded" id="q-eventids-1" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">index=windows EventCode IN (4624, 4625, 4740) | eval Status=case(EventCode==4624,&quot;SUCCESS&quot;, EventCode==4625,&quot;FAILURE&quot;, EventCode==4740,&quot;LOCKED&quot;) | stats count by TargetUserName, Status, src_ip</pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Query: New Windows Service Installation (Persistence) -->
+                <div class="col-lg-6 mb-4 query-item" data-category="eventids">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-desktop text-info me-2"></i>
+                                <span class="fw-bold text-white small">Windows System</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">System Event 7045 • T1543.003</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-eventids-2')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">New Windows Service Installation (Persistence)</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Tracks new service creation entries in the Windows System event log, inspecting the ImagePath for suspicious script runners or temp paths.</p>
+                            <pre class="query-code p-2 rounded" id="q-eventids-2" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">index=windows source=&quot;WinEventLog:System&quot; EventCode=7045 | table _time, ComputerName, ServiceName, ImagePath, ServiceType, StartType</pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Query: Rapid Multi-Account Authentication Failures -->
+                <div class="col-lg-6 mb-4 query-item" data-category="qradar">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-bolt text-warning me-2"></i>
+                                <span class="fw-bold text-white small">QRadar AQL</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">QRadar AQL • T1110</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-qradar-1')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">Rapid Multi-Account Authentication Failures</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Correlates multiple failed authentications grouped by source IP address within a sliding 5-minute detection window in IBM QRadar.</p>
+                            <pre class="query-code p-2 rounded" id="q-qradar-1" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">SELECT &quot;SourceIP&quot;, COUNT(&quot;EventID&quot;) AS &quot;Failures&quot;, UNIQUE(&quot;UserName&quot;) AS &quot;TargetUsers&quot; FROM events WHERE &quot;EventID&quot; = 4625 GROUP BY &quot;SourceIP&quot; HAVING &quot;Failures&quot; &gt; 15 LAST 5 MINUTES</pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Query: Off-Hours Administrative Privilege Use -->
+                <div class="col-lg-6 mb-4 query-item" data-category="qradar">
+                    <div class="query-card h-100 p-0 shadow">
+                        <div class="query-card-header d-flex justify-content-between align-items-center px-3 py-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-bolt text-warning me-2"></i>
+                                <span class="fw-bold text-white small">QRadar AQL</span>
+                                <span class="badge bg-secondary ms-2 small" style="font-size: 0.72rem;">QRadar AQL • T1078</span>
+                            </div>
+                            <button class="copy-btn btn btn-sm btn-primary" onclick="copyQuery(this, 'q-qradar-2')">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                        <div class="query-card-body p-3">
+                            <h6 class="text-white fw-bold mb-1">Off-Hours Administrative Privilege Use</h6>
+                            <p class="text-muted small mb-2" style="font-size: 0.82rem;">Filters successful administrative sessions occurring outside standard business hours (between 22:00 and 06:00).</p>
+                            <pre class="query-code p-2 rounded" id="q-qradar-2" style="background: #080f1d; border: 1px solid rgba(159,205,254,0.15); max-height: 160px; overflow-y: auto;">SELECT UTF8(payload), &quot;UserName&quot;, &quot;SourceIP&quot;, &quot;LogonType&quot; FROM events WHERE &quot;EventID&quot; = 4624 AND &quot;LogonType&quot; = 10 AND DATEFORMAT(&quot;DeviceTime&quot;, &#039;HH&#039;) IN (&#039;22&#039;,&#039;23&#039;,&#039;00&#039;,&#039;01&#039;,&#039;02&#039;,&#039;03&#039;,&#039;04&#039;,&#039;05&#039;) LAST 24 HOURS</pre>
                         </div>
                     </div>
                 </div>
@@ -825,23 +988,33 @@ level: high</pre>
                 <div class="col-lg-7">
                     <div class="contact-form p-4">
                         <h4 class="mb-3 fw-bold text-primary">Send a Message</h4>
-                        <form id="contactForm">
+                        <form id="contactForm" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                                    <label for="contactName" class="form-label small fw-semibold text-secondary">Your Name *</label>
+                                    <input type="text" id="contactName" name="name" class="form-control" placeholder="e.g. Hiring Manager / Recruiter" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                                    <label for="contactEmail" class="form-label small fw-semibold text-secondary">Your Email *</label>
+                                    <input type="email" id="contactEmail" name="email" class="form-control" placeholder="e.g. recruiter@company.com" required>
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                                    <label for="contactSubject" class="form-label small fw-semibold text-secondary">Subject *</label>
+                                    <input type="text" id="contactSubject" name="subject" class="form-control" placeholder="e.g. SOC Analyst Role Opportunity" required>
                                 </div>
                                 <div class="col-12">
-                                    <textarea name="message" rows="5" class="form-control" placeholder="Your Message" required></textarea>
+                                    <label for="contactMessage" class="form-label small fw-semibold text-secondary">Message *</label>
+                                    <textarea id="contactMessage" name="message" rows="5" class="form-control" placeholder="Type your message here..." required></textarea>
                                 </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary px-4 py-2">Send Message</button>
+                                <div class="col-12 d-flex flex-wrap align-items-center gap-3 mt-3">
+                                    <button type="submit" id="contactSubmitBtn" class="btn btn-primary px-4 py-2">
+                                        <i class="fas fa-paper-plane me-2"></i><span id="submitBtnText">Send Message</span>
+                                    </button>
+                                    <a id="directMailtoBtn" href="mailto:gnanaprakash2956@gmail.com" class="btn btn-outline-primary px-3 py-2">
+                                        <i class="fas fa-envelope-open-text me-2"></i>Open in Email App
+                                    </a>
                                 </div>
+                                <div class="col-12 mt-3" id="formFeedback" style="display: none;"></div>
                             </div>
                         </form>
                     </div>
