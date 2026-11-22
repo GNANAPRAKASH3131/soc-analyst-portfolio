@@ -151,6 +151,230 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    
+    // Interactive Cyber Shockwave across the whole Home / Hero Section on Profile Image Hover
+    function initHeroWave() {
+        const heroSection = document.getElementById('hero');
+        const waveCanvas = document.getElementById('hero-wave-canvas');
+        const heroProfileImgContainer = document.getElementById('heroProfileImgContainer') || document.querySelector('.hero-img');
+        const heroProfileImg = document.getElementById('heroProfileImg') || (heroProfileImgContainer ? heroProfileImgContainer.querySelector('img') : null);
+
+        if (!heroSection || !waveCanvas || !heroProfileImg) return;
+
+        const ctx = waveCanvas.getContext('2d');
+        let width = 0;
+        let height = 0;
+        let dpr = window.devicePixelRatio || 1;
+        let waves = [];
+        let isHovering = false;
+        let waveInterval = null;
+        let animationFrameId = null;
+        let lastMoveWaveTime = 0;
+
+        function resizeCanvas() {
+            const rect = heroSection.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+            dpr = window.devicePixelRatio || 1;
+            waveCanvas.width = width * dpr;
+            waveCanvas.height = height * dpr;
+            waveCanvas.style.width = width + 'px';
+            waveCanvas.style.height = height + 'px';
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(dpr, dpr);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function getImageCenter() {
+            const heroRect = heroSection.getBoundingClientRect();
+            const imgRect = heroProfileImg.getBoundingClientRect();
+            return {
+                x: (imgRect.left + imgRect.width / 2) - heroRect.left,
+                y: (imgRect.top + imgRect.height / 2) - heroRect.top,
+                radius: Math.min(imgRect.width, imgRect.height) / 2
+            };
+        }
+
+        class Shockwave {
+            constructor(originX, originY, startRadius, isMinor = false) {
+                this.x = originX;
+                this.y = originY;
+                this.radius = startRadius;
+                // Calculate distance to furthest corner to guarantee wave covers the whole home section
+                const d1 = Math.hypot(originX, originY);
+                const d2 = Math.hypot(width - originX, originY);
+                const d3 = Math.hypot(originX, height - originY);
+                const d4 = Math.hypot(width - originX, height - originY);
+                this.maxRadius = Math.max(d1, d2, d3, d4) + 250;
+                this.speed = isMinor ? 10 : 13;
+                this.baseAlpha = isMinor ? 0.65 : 0.95;
+                this.lineWidth = isMinor ? 2 : 3.5;
+                this.isMinor = isMinor;
+
+                // Generate particles along the wave perimeter
+                this.particles = [];
+                const particleCount = isMinor ? 12 : 24;
+                for (let i = 0; i < particleCount; i++) {
+                    this.particles.push({
+                        angle: (i / particleCount) * Math.PI * 2 + (Math.random() * 0.15 - 0.075),
+                        size: Math.random() * 2.5 + 1.5,
+                        offset: (Math.random() - 0.5) * 14,
+                        alpha: Math.random() * 0.6 + 0.4
+                    });
+                }
+            }
+
+            update() {
+                this.radius += this.speed;
+                return this.radius < this.maxRadius;
+            }
+
+            draw(ctx) {
+                const progress = this.radius / this.maxRadius;
+                const alpha = Math.max(0, (1 - Math.pow(progress, 1.3)) * this.baseAlpha);
+                if (alpha <= 0.01) return;
+
+                ctx.save();
+
+                // 1. Radial soft glow behind the main wave crest
+                if (!this.isMinor && this.radius > 30) {
+                    const glowR1 = Math.max(0, this.radius - 30);
+                    const glowR2 = this.radius + 20;
+                    const grad = ctx.createRadialGradient(this.x, this.y, glowR1, this.x, this.y, glowR2);
+                    grad.addColorStop(0, 'rgba(0, 229, 255, 0)');
+                    grad.addColorStop(0.5, `rgba(0, 229, 255, ${alpha * 0.22})`);
+                    grad.addColorStop(0.8, `rgba(42, 107, 180, ${alpha * 0.18})`);
+                    grad.addColorStop(1, 'rgba(42, 107, 180, 0)');
+
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, glowR2, 0, Math.PI * 2);
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+                }
+
+                // 2. High-intensity neon wave crest line
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.lineWidth = Math.max(1, this.lineWidth * (1 - progress * 0.5));
+                ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
+                ctx.shadowColor = 'rgba(0, 240, 255, 0.85)';
+                ctx.shadowBlur = this.isMinor ? 8 : 16;
+                ctx.stroke();
+
+                // 3. Secondary subtle sonar echo ring
+                if (!this.isMinor && this.radius > 60) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, Math.max(10, this.radius - 24), 0, Math.PI * 2);
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = `rgba(159, 205, 254, ${alpha * 0.45})`;
+                    ctx.setLineDash([8, 14]);
+                    ctx.shadowBlur = 4;
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+
+                // 4. Spark particles riding the shockwave crest
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = 'rgba(0, 255, 240, 0.8)';
+                for (let i = 0; i < this.particles.length; i++) {
+                    const p = this.particles[i];
+                    const px = this.x + Math.cos(p.angle) * (this.radius + p.offset);
+                    const py = this.y + Math.sin(p.angle) * (this.radius + p.offset);
+
+                    if (px >= -25 && px <= width + 25 && py >= -25 && py <= height + 25) {
+                        ctx.beginPath();
+                        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(0, 245, 255, ${alpha * p.alpha})`;
+                        ctx.fill();
+                    }
+                }
+
+                ctx.restore();
+            }
+        }
+
+        function spawnWave(isMinor = false) {
+            const center = getImageCenter();
+            waves.push(new Shockwave(center.x, center.y, center.radius * 0.95, isMinor));
+            if (!animationFrameId) {
+                animateWaves();
+            }
+        }
+
+        function animateWaves() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = waves.length - 1; i >= 0; i--) {
+                const wave = waves[i];
+                const alive = wave.update();
+                if (alive) {
+                    wave.draw(ctx);
+                } else {
+                    waves.splice(i, 1);
+                }
+            }
+
+            if (waves.length > 0 || isHovering) {
+                animationFrameId = requestAnimationFrame(animateWaves);
+            } else {
+                ctx.clearRect(0, 0, width, height);
+                animationFrameId = null;
+                heroSection.classList.remove('hero-wave-active');
+            }
+        }
+
+        function startWaveEmission() {
+            if (isHovering) return;
+            isHovering = true;
+            heroSection.classList.add('hero-wave-active');
+
+            // Fire first wave immediately
+            spawnWave(false);
+
+            // Keep emitting waves at continuous intervals while hovering
+            if (waveInterval) clearInterval(waveInterval);
+            waveInterval = setInterval(() => {
+                if (isHovering) {
+                    spawnWave(false);
+                }
+            }, 420);
+        }
+
+        function stopWaveEmission() {
+            isHovering = false;
+            if (waveInterval) {
+                clearInterval(waveInterval);
+                waveInterval = null;
+            }
+        }
+
+        const targetEl = heroProfileImgContainer || heroProfileImg;
+
+        targetEl.addEventListener('mouseenter', startWaveEmission);
+        targetEl.addEventListener('mouseleave', stopWaveEmission);
+
+        targetEl.addEventListener('mousemove', function() {
+            const now = Date.now();
+            if (now - lastMoveWaveTime > 220) {
+                lastMoveWaveTime = now;
+                spawnWave(true);
+            }
+        });
+
+        targetEl.addEventListener('touchstart', function() {
+            startWaveEmission();
+        }, { passive: true });
+
+        targetEl.addEventListener('touchend', function() {
+            setTimeout(stopWaveEmission, 1000);
+        }, { passive: true });
+    }
+
+    // Initialize Hero Wave
+    initHeroWave();
+
     // Mobile Menu Toggle
     const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
     const navMenu = document.querySelector('.nav-menu');

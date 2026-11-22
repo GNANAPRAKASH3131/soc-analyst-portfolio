@@ -128,7 +128,9 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero d-flex align-items-center">
-        <div class="container">
+        <!-- Interactive Cyber Wave Canvas -->
+        <canvas id="hero-wave-canvas" class="hero-wave-canvas" aria-hidden="true"></canvas>
+        <div class="container hero-container position-relative">
             <div class="row align-items-center">
                 <div class="col-lg-6 hero-content">
                     <h1 class="mb-3 glitche" data-text="Hi, I'm Gnana Prakash">Hi, I'm <span class="highlight">Gnana Prakash</span></h1>
@@ -148,8 +150,11 @@
                     </div>
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0 d-flex justify-content-center">
-                    <div class="hero-img">
-                        <img src="assets/images/profile.jpg" alt="Gnana Prakash Gajula - SOC Analyst" class="img-fluid rounded-circle shadow-lg" style="width: 380px; height: 380px; object-fit: cover;">
+                    <div class="hero-img" id="heroProfileImgContainer">
+                        <div class="hero-wave-pulse hero-wave-pulse-1"></div>
+                        <div class="hero-wave-pulse hero-wave-pulse-2"></div>
+                        <div class="hero-wave-pulse hero-wave-pulse-3"></div>
+                        <img src="assets/images/profile.jpg" alt="Gnana Prakash Gajula - SOC Analyst" id="heroProfileImg" class="img-fluid rounded-circle shadow-lg" style="width: 380px; height: 380px; object-fit: cover;">
                     </div>
                 </div>
             </div>
