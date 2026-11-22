@@ -1461,7 +1461,7 @@ footer {
 }
 
 
-/* Interactive Water Wave Effect on Hero (One-Time per Hover) */
+/* Interactive Water Wave Effect on Hero (One-Time per Hover - Merged with Background) */
 .hero-wave-canvas {
     position: absolute;
     top: 0;
@@ -1470,6 +1470,7 @@ footer {
     height: 100%;
     pointer-events: none;
     z-index: 2;
+    mix-blend-mode: overlay;
     will-change: transform;
 }
 
@@ -1495,66 +1496,15 @@ footer {
 .hero-img:hover img,
 .hero.hero-wave-active .hero-img img {
     transform: scale(1.04);
-    box-shadow: 0 0 30px rgba(130, 220, 255, 0.8), 0 0 60px rgba(42, 107, 180, 0.6) !important;
+    box-shadow: 0 0 35px rgba(159, 205, 254, 0.7), 0 0 65px rgba(42, 107, 180, 0.5) !important;
 }
 
-/* Water wave ripple pulses (triggers once per hover) */
-.hero-wave-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    border-radius: 50%;
-    pointer-events: none;
-    opacity: 0;
-    z-index: 1;
-    border: 2px solid rgba(130, 220, 255, 0.7);
-    box-shadow: 0 0 25px rgba(100, 210, 255, 0.4), inset 0 0 25px rgba(100, 210, 255, 0.2);
-    width: 380px;
-    height: 380px;
-}
-
-.hero.hero-wave-active .hero-wave-pulse-1 {
-    animation: heroWaterWaveSpread 2.8s cubic-bezier(0.12, 0.8, 0.32, 1) 1 forwards;
-}
-
-.hero.hero-wave-active .hero-wave-pulse-2 {
-    animation: heroWaterWaveSpread 2.8s cubic-bezier(0.12, 0.8, 0.32, 1) 0.22s 1 forwards;
-}
-
-.hero.hero-wave-active .hero-wave-pulse-3 {
-    animation: heroWaterWaveSpread 2.8s cubic-bezier(0.12, 0.8, 0.32, 1) 0.44s 1 forwards;
-}
-
-@keyframes heroWaterWaveSpread {
-    0% {
-        opacity: 0.85;
-        transform: translate(-50%, -50%) scale(1);
-        border-color: rgba(180, 235, 255, 0.85);
-        box-shadow: 0 0 30px rgba(120, 215, 255, 0.5), inset 0 0 20px rgba(120, 215, 255, 0.25);
-    }
-    35% {
-        opacity: 0.6;
-        border-color: rgba(130, 220, 255, 0.65);
-    }
-    70% {
-        opacity: 0.2;
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(7.5);
-        border-color: rgba(42, 107, 180, 0.05);
-        box-shadow: none;
-    }
-}
-
-/* Ambient water wave glow across the home section */
+/* Subtle fluid surface swell */
 .hero.hero-wave-active {
-    box-shadow: inset 0 0 120px rgba(100, 210, 255, 0.2);
-    transition: box-shadow 0.6s ease;
+    transition: background 0.8s ease;
 }
 
 .hero.hero-wave-active .hero-content h1 .highlight {
-    text-shadow: 0 0 25px rgba(130, 220, 255, 0.9), 0 0 45px rgba(100, 210, 255, 0.6);
+    text-shadow: 0 0 20px rgba(159, 205, 254, 0.85);
     transition: text-shadow 0.5s ease;
 }

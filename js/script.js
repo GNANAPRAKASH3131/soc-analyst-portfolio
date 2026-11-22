@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     
-    // Interactive Water Wave across the whole Home / Hero Section (One-Time per Hover)
+    // Interactive Water Wave across the whole Home / Hero Section (One-Time per Hover - Merged with Background)
     function initHeroWave() {
         const heroSection = document.getElementById('hero');
         const waveCanvas = document.getElementById('hero-wave-canvas');
@@ -195,94 +195,93 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
 
-        // Concentric water wave ripple packet (resembles realistic fluid ripples from a water droplet)
+        // Concentric water wave ripple packet that perfectly blends with the background gradient (#2a6bb4 to #9fcdfe)
         class WaterWavePacket {
             constructor(originX, originY, startRadius) {
                 this.x = originX;
                 this.y = originY;
                 this.radius = startRadius;
 
-                // Guarantee wave expands to furthest corner of hero section
+                // Expand smoothly to the furthest corner of the hero section
                 const d1 = Math.hypot(originX, originY);
                 const d2 = Math.hypot(width - originX, originY);
                 const d3 = Math.hypot(originX, height - originY);
                 const d4 = Math.hypot(width - originX, height - originY);
-                this.maxRadius = Math.max(d1, d2, d3, d4) + 260;
+                this.maxRadius = Math.max(d1, d2, d3, d4) + 200;
 
-                this.speed = 11.5; // Natural fluid wave propagation speed
+                this.speed = 10; // Gentle, natural water wave expansion
 
-                // Water ripple crests and harmonics
+                // 3 fluid ripples spaced like real water surface waves
                 this.ripples = [
-                    { offset: 0,    width: 4.0, weight: 1.0,  hasHighlight: true },
-                    { offset: -34,  width: 3.2, weight: 0.85, hasHighlight: true },
-                    { offset: -68,  width: 2.8, weight: 0.65, hasHighlight: false },
-                    { offset: -102, width: 2.2, weight: 0.45, hasHighlight: false },
-                    { offset: -136, width: 1.8, weight: 0.25, hasHighlight: false }
+                    { offset: 0,   width: 5.0, weight: 1.0 },
+                    { offset: -45, width: 4.0, weight: 0.75 },
+                    { offset: -90, width: 3.0, weight: 0.45 }
                 ];
             }
 
             update() {
                 this.radius += this.speed;
-                return (this.radius - 136) < this.maxRadius;
+                return (this.radius - 90) < this.maxRadius;
             }
 
             draw(ctx) {
                 const progress = this.radius / this.maxRadius;
-                // Fluid dissipation curve: starts crisp, stays visible across page, fades softly at edges
-                const packetAlpha = Math.max(0, (1 - Math.pow(progress, 1.25)));
+                // Soft fluid dissipation curve merging smoothly into the background
+                const packetAlpha = Math.max(0, Math.cos(progress * Math.PI * 0.5));
                 if (packetAlpha <= 0.005) return;
 
                 ctx.save();
 
-                // 1. Water refractive body band (translucent fluid shimmer between ripples)
-                const outerR = this.radius + 18;
-                const innerR = Math.max(0, this.radius - 120);
-                if (outerR > 15) {
-                    const waterGrad = ctx.createRadialGradient(this.x, this.y, innerR, this.x, this.y, outerR);
-                    waterGrad.addColorStop(0, 'rgba(42, 107, 180, 0)');
-                    waterGrad.addColorStop(0.3, `rgba(40, 160, 240, ${packetAlpha * 0.12})`);
-                    waterGrad.addColorStop(0.7, `rgba(130, 220, 255, ${packetAlpha * 0.18})`);
-                    waterGrad.addColorStop(1, 'rgba(42, 107, 180, 0)');
+                // 1. Water swell band matching the hero palette (#2a6bb4, #9fcdfe, #dff0ff)
+                const outerR = this.radius + 20;
+                const innerR = Math.max(0, this.radius - 90);
+                if (outerR > 10) {
+                    const swellGrad = ctx.createRadialGradient(this.x, this.y, innerR, this.x, this.y, outerR);
+                    swellGrad.addColorStop(0, 'rgba(42, 107, 180, 0)');
+                    swellGrad.addColorStop(0.35, `rgba(159, 205, 254, ${packetAlpha * 0.22})`);
+                    swellGrad.addColorStop(0.65, `rgba(223, 240, 255, ${packetAlpha * 0.28})`);
+                    swellGrad.addColorStop(1, 'rgba(42, 107, 180, 0)');
 
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, outerR, 0, Math.PI * 2);
-                    ctx.fillStyle = waterGrad;
+                    ctx.fillStyle = swellGrad;
                     ctx.fill();
                 }
 
-                // 2. Draw each fluid ripple ring in the wave packet
+                // 2. Concentric ripples with smooth water trough depression and soft crest highlight
                 for (let i = 0; i < this.ripples.length; i++) {
                     const rip = this.ripples[i];
                     const r = this.radius + rip.offset;
                     if (r <= 5) continue;
 
-                    const ripAlpha = packetAlpha * rip.weight;
+                    const alpha = packetAlpha * rip.weight;
 
-                    // A. Wave trough shadow (provides realistic 3D depth to the water surface)
+                    // A. Wave trough depression (harmonious with #2a6bb4)
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, r + 2.5, 0, Math.PI * 2);
-                    ctx.lineWidth = rip.width + 2;
-                    ctx.strokeStyle = `rgba(15, 60, 120, ${ripAlpha * 0.35})`;
+                    ctx.arc(this.x, this.y, r + 3, 0, Math.PI * 2);
+                    ctx.lineWidth = rip.width + 3;
+                    ctx.strokeStyle = `rgba(32, 85, 148, ${alpha * 0.35})`;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = 'rgba(32, 85, 148, 0.4)';
                     ctx.stroke();
 
-                    // B. Main fluid crest (water aqua / cyan highlight)
+                    // B. Soft water crest highlight (harmonious with #9fcdfe and #dff0ff)
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
-                    ctx.lineWidth = Math.max(1, rip.width * (1 - progress * 0.4));
-                    ctx.strokeStyle = `rgba(140, 225, 255, ${ripAlpha * 0.88})`;
-                    ctx.shadowColor = 'rgba(160, 235, 255, 0.75)';
-                    ctx.shadowBlur = 8;
+                    ctx.lineWidth = rip.width;
+                    ctx.strokeStyle = `rgba(223, 240, 255, ${alpha * 0.75})`;
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = 'rgba(159, 205, 254, 0.6)';
                     ctx.stroke();
 
-                    // C. Specular crest highlight (light reflection on water surface)
-                    if (rip.hasHighlight) {
-                        ctx.beginPath();
-                        ctx.arc(this.x, this.y, Math.max(0, r - 1.5), 0, Math.PI * 2);
-                        ctx.lineWidth = Math.max(0.8, rip.width * 0.45);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${ripAlpha * 0.75})`;
-                        ctx.shadowBlur = 4;
-                        ctx.stroke();
-                    }
+                    // C. Gentle water surface glint
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, Math.max(0, r - 1), 0, Math.PI * 2);
+                    ctx.lineWidth = Math.max(1, rip.width * 0.4);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.55})`;
+                    ctx.shadowBlur = 4;
+                    ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+                    ctx.stroke();
                 }
 
                 ctx.restore();
@@ -313,16 +312,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Sends the water wave EXACTLY ONE TIME on hover
         function triggerSingleWaterWave() {
-            if (waveFiredOnThisHover) return; // Prevent any repeated trigger during this hover
+            if (waveFiredOnThisHover) return;
             waveFiredOnThisHover = true;
 
             const center = getImageCenter();
-            // Start a new water wave packet
             waves = [new WaterWavePacket(center.x, center.y, center.radius * 0.95)];
 
-            heroSection.classList.remove('hero-wave-active');
-            // Force DOM reflow to restart CSS animation cleanly once
-            void heroSection.offsetWidth;
             heroSection.classList.add('hero-wave-active');
 
             if (!animationFrameId) {
@@ -331,7 +326,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function resetHoverTrigger() {
-            // Reset flag when mouse leaves, allowing a new single wave on the next hover
             waveFiredOnThisHover = false;
         }
 
@@ -341,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
         targetEl.addEventListener('mouseenter', triggerSingleWaterWave);
         targetEl.addEventListener('mouseleave', resetHoverTrigger);
 
-        // Mobile touch support: triggers one time per touch
+        // Mobile touch support
         targetEl.addEventListener('touchstart', function() {
             triggerSingleWaterWave();
         }, { passive: true });
