@@ -1461,7 +1461,7 @@ footer {
 }
 
 
-/* Interactive Water Wave Effect on Hero (One-Time per Hover - Merged with Background) */
+/* Real Liquid Distortion & Refraction Water Wave on Hero */
 .hero-wave-canvas {
     position: absolute;
     top: 0;
@@ -1479,6 +1479,11 @@ footer {
     z-index: 3;
 }
 
+.hero-content.liquid-refracting {
+    filter: url(#liquidWaterRefraction);
+    will-change: filter, transform;
+}
+
 .hero-img {
     position: relative;
     display: inline-block;
@@ -1490,16 +1495,35 @@ footer {
 .hero-img img {
     position: relative;
     z-index: 2;
-    transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2), box-shadow 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2), box-shadow 0.6s ease;
 }
 
 .hero-img:hover img,
 .hero.hero-wave-active .hero-img img {
-    transform: scale(1.04);
-    box-shadow: 0 0 35px rgba(159, 205, 254, 0.7), 0 0 65px rgba(42, 107, 180, 0.5) !important;
+    transform: scale(1.035);
+    box-shadow: 0 0 35px rgba(159, 205, 254, 0.65), 0 0 65px rgba(42, 107, 180, 0.45) !important;
 }
 
-/* Subtle fluid surface swell */
+/* Fluid water bob animation on elements as the wave sweeps over them */
+.water-bob {
+    animation: waterRippleBob 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes waterRippleBob {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    30% {
+        transform: translateY(-4px) scale(1.012);
+    }
+    65% {
+        transform: translateY(2px) scale(0.994);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
 .hero.hero-wave-active {
     transition: background 0.8s ease;
 }
