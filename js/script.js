@@ -268,6 +268,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         const TARGET_EMAIL = 'gnanaprakash2956@gmail.com';
+
+        function getISTTimestamp() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                weekday: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+            const timeStr = now.toLocaleTimeString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+            return `${dateStr} ${timeStr} (IST)`;
+        }
         const submitBtn = document.getElementById('contactSubmitBtn');
         const submitBtnText = document.getElementById('submitBtnText');
         const formFeedback = document.getElementById('formFeedback');
@@ -284,7 +303,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = emailInput ? emailInput.value.trim() : '';
             const subject = subjectInput && subjectInput.value.trim() ? subjectInput.value.trim() : 'SOC Analyst Portfolio Inquiry';
             const message = messageInput ? messageInput.value.trim() : '';
-            const body = `${message}\n\n---\nFrom: ${name || 'Website Visitor'}\nEmail: ${email || 'Not provided'}`;
+            const istTime = getISTTimestamp();
+            const body = `${message}\n\n---\nFrom: ${name || 'Website Visitor'}\nEmail: ${email || 'Not provided'}\nSubmitted at: ${istTime}`;
             directMailtoBtn.href = `mailto:${TARGET_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
 
@@ -326,6 +346,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (icon) icon.className = 'fas fa-spinner fa-spin me-2';
             }
             if (formFeedback) formFeedback.style.display = 'none';
+            const istTime = getISTTimestamp();
+            const istInput = document.getElementById('submittedAtIST');
+            if (istInput) istInput.value = istTime;
 
             try {
                 const response = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
@@ -337,8 +360,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: JSON.stringify({
                         name: name,
                         email: email,
-                        _subject: `[SOC Portfolio] ${subject} - from ${name}`,
+                        subject: subject,
                         message: message,
+                        "Submitted at (IST)": istTime,
+                        "Timezone": "India Standard Time (IST, UTC+05:30)",
+                        _subject: `[SOC Portfolio] ${subject} - from ${name} [${istTime}]`,
                         _template: 'table',
                         _captcha: 'false'
                     })
@@ -349,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (response.ok && (data.success === 'true' || data.success === true)) {
                     if (formFeedback) {
                         formFeedback.style.display = 'block';
-                        formFeedback.innerHTML = `<div class="alert alert-success mb-0"><i class="fas fa-check-circle me-2"></i><strong>Thank you, ${name}!</strong> Your message has been sent directly to ${TARGET_EMAIL}. I will get back to you shortly.</div>`;
+                        formFeedback.innerHTML = `<div class="alert alert-success mb-0"><i class="fas fa-check-circle me-2"></i><strong>Thank you, ${name}!</strong> Your message has been sent directly to ${TARGET_EMAIL} at <strong>${istTime}</strong>. I will get back to you shortly.</div>`;
                     }
                     contactForm.reset();
                     updateMailto();
