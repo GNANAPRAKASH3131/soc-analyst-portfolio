@@ -264,45 +264,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Query Library Filter & Real-Time Search
-    const queryFilterButtons = document.querySelectorAll('.query-filters button');
-    const querySearchInput = document.getElementById('querySearchInput');
-    const queryItems = document.querySelectorAll('.query-item');
-
-    function filterQueries() {
-        const activeBtn = document.querySelector('.query-filters button.active');
-        const activeFilter = activeBtn ? activeBtn.getAttribute('data-query-filter') : 'all';
-        const searchTerm = querySearchInput ? querySearchInput.value.toLowerCase().trim() : '';
-
-        queryItems.forEach(item => {
-            const category = item.getAttribute('data-category');
-            const textContent = item.textContent.toLowerCase();
-
-            const matchesCategory = (activeFilter === 'all' || category === activeFilter);
-            const matchesSearch = (!searchTerm || textContent.includes(searchTerm));
-
-            if (matchesCategory && matchesSearch) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-
-    if (queryFilterButtons.length > 0) {
-        queryFilterButtons.forEach(btn => {
-            btn.addEventListener('click', function() {
-                queryFilterButtons.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                filterQueries();
-            });
-        });
-    }
-
-    if (querySearchInput) {
-        querySearchInput.addEventListener('input', filterQueries);
-    }
-
     // Contact Form Submission with FormSubmit.co and direct inbox delivery
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
