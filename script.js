@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     
-    // Interactive Cyber Shockwave across the whole Home / Hero Section on Profile Image Hover
+    // Interactive Water Wave across the whole Home / Hero Section (One-Time per Hover)
     function initHeroWave() {
         const heroSection = document.getElementById('hero');
         const waveCanvas = document.getElementById('hero-wave-canvas');
@@ -166,10 +166,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let height = 0;
         let dpr = window.devicePixelRatio || 1;
         let waves = [];
-        let isHovering = false;
-        let waveInterval = null;
+        let waveFiredOnThisHover = false;
         let animationFrameId = null;
-        let lastMoveWaveTime = 0;
 
         function resizeCanvas() {
             const rect = heroSection.getBoundingClientRect();
@@ -197,109 +195,97 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
 
-        class Shockwave {
-            constructor(originX, originY, startRadius, isMinor = false) {
+        // Concentric water wave ripple packet (resembles realistic fluid ripples from a water droplet)
+        class WaterWavePacket {
+            constructor(originX, originY, startRadius) {
                 this.x = originX;
                 this.y = originY;
                 this.radius = startRadius;
-                // Calculate distance to furthest corner to guarantee wave covers the whole home section
+
+                // Guarantee wave expands to furthest corner of hero section
                 const d1 = Math.hypot(originX, originY);
                 const d2 = Math.hypot(width - originX, originY);
                 const d3 = Math.hypot(originX, height - originY);
                 const d4 = Math.hypot(width - originX, height - originY);
-                this.maxRadius = Math.max(d1, d2, d3, d4) + 250;
-                this.speed = isMinor ? 10 : 13;
-                this.baseAlpha = isMinor ? 0.65 : 0.95;
-                this.lineWidth = isMinor ? 2 : 3.5;
-                this.isMinor = isMinor;
+                this.maxRadius = Math.max(d1, d2, d3, d4) + 260;
 
-                // Generate particles along the wave perimeter
-                this.particles = [];
-                const particleCount = isMinor ? 12 : 24;
-                for (let i = 0; i < particleCount; i++) {
-                    this.particles.push({
-                        angle: (i / particleCount) * Math.PI * 2 + (Math.random() * 0.15 - 0.075),
-                        size: Math.random() * 2.5 + 1.5,
-                        offset: (Math.random() - 0.5) * 14,
-                        alpha: Math.random() * 0.6 + 0.4
-                    });
-                }
+                this.speed = 11.5; // Natural fluid wave propagation speed
+
+                // Water ripple crests and harmonics
+                this.ripples = [
+                    { offset: 0,    width: 4.0, weight: 1.0,  hasHighlight: true },
+                    { offset: -34,  width: 3.2, weight: 0.85, hasHighlight: true },
+                    { offset: -68,  width: 2.8, weight: 0.65, hasHighlight: false },
+                    { offset: -102, width: 2.2, weight: 0.45, hasHighlight: false },
+                    { offset: -136, width: 1.8, weight: 0.25, hasHighlight: false }
+                ];
             }
 
             update() {
                 this.radius += this.speed;
-                return this.radius < this.maxRadius;
+                return (this.radius - 136) < this.maxRadius;
             }
 
             draw(ctx) {
                 const progress = this.radius / this.maxRadius;
-                const alpha = Math.max(0, (1 - Math.pow(progress, 1.3)) * this.baseAlpha);
-                if (alpha <= 0.01) return;
+                // Fluid dissipation curve: starts crisp, stays visible across page, fades softly at edges
+                const packetAlpha = Math.max(0, (1 - Math.pow(progress, 1.25)));
+                if (packetAlpha <= 0.005) return;
 
                 ctx.save();
 
-                // 1. Radial soft glow behind the main wave crest
-                if (!this.isMinor && this.radius > 30) {
-                    const glowR1 = Math.max(0, this.radius - 30);
-                    const glowR2 = this.radius + 20;
-                    const grad = ctx.createRadialGradient(this.x, this.y, glowR1, this.x, this.y, glowR2);
-                    grad.addColorStop(0, 'rgba(0, 229, 255, 0)');
-                    grad.addColorStop(0.5, `rgba(0, 229, 255, ${alpha * 0.22})`);
-                    grad.addColorStop(0.8, `rgba(42, 107, 180, ${alpha * 0.18})`);
-                    grad.addColorStop(1, 'rgba(42, 107, 180, 0)');
+                // 1. Water refractive body band (translucent fluid shimmer between ripples)
+                const outerR = this.radius + 18;
+                const innerR = Math.max(0, this.radius - 120);
+                if (outerR > 15) {
+                    const waterGrad = ctx.createRadialGradient(this.x, this.y, innerR, this.x, this.y, outerR);
+                    waterGrad.addColorStop(0, 'rgba(42, 107, 180, 0)');
+                    waterGrad.addColorStop(0.3, `rgba(40, 160, 240, ${packetAlpha * 0.12})`);
+                    waterGrad.addColorStop(0.7, `rgba(130, 220, 255, ${packetAlpha * 0.18})`);
+                    waterGrad.addColorStop(1, 'rgba(42, 107, 180, 0)');
 
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, glowR2, 0, Math.PI * 2);
-                    ctx.fillStyle = grad;
+                    ctx.arc(this.x, this.y, outerR, 0, Math.PI * 2);
+                    ctx.fillStyle = waterGrad;
                     ctx.fill();
                 }
 
-                // 2. High-intensity neon wave crest line
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.lineWidth = Math.max(1, this.lineWidth * (1 - progress * 0.5));
-                ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
-                ctx.shadowColor = 'rgba(0, 240, 255, 0.85)';
-                ctx.shadowBlur = this.isMinor ? 8 : 16;
-                ctx.stroke();
+                // 2. Draw each fluid ripple ring in the wave packet
+                for (let i = 0; i < this.ripples.length; i++) {
+                    const rip = this.ripples[i];
+                    const r = this.radius + rip.offset;
+                    if (r <= 5) continue;
 
-                // 3. Secondary subtle sonar echo ring
-                if (!this.isMinor && this.radius > 60) {
+                    const ripAlpha = packetAlpha * rip.weight;
+
+                    // A. Wave trough shadow (provides realistic 3D depth to the water surface)
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, Math.max(10, this.radius - 24), 0, Math.PI * 2);
-                    ctx.lineWidth = 1;
-                    ctx.strokeStyle = `rgba(159, 205, 254, ${alpha * 0.45})`;
-                    ctx.setLineDash([8, 14]);
-                    ctx.shadowBlur = 4;
+                    ctx.arc(this.x, this.y, r + 2.5, 0, Math.PI * 2);
+                    ctx.lineWidth = rip.width + 2;
+                    ctx.strokeStyle = `rgba(15, 60, 120, ${ripAlpha * 0.35})`;
                     ctx.stroke();
-                    ctx.setLineDash([]);
-                }
 
-                // 4. Spark particles riding the shockwave crest
-                ctx.shadowBlur = 6;
-                ctx.shadowColor = 'rgba(0, 255, 240, 0.8)';
-                for (let i = 0; i < this.particles.length; i++) {
-                    const p = this.particles[i];
-                    const px = this.x + Math.cos(p.angle) * (this.radius + p.offset);
-                    const py = this.y + Math.sin(p.angle) * (this.radius + p.offset);
+                    // B. Main fluid crest (water aqua / cyan highlight)
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
+                    ctx.lineWidth = Math.max(1, rip.width * (1 - progress * 0.4));
+                    ctx.strokeStyle = `rgba(140, 225, 255, ${ripAlpha * 0.88})`;
+                    ctx.shadowColor = 'rgba(160, 235, 255, 0.75)';
+                    ctx.shadowBlur = 8;
+                    ctx.stroke();
 
-                    if (px >= -25 && px <= width + 25 && py >= -25 && py <= height + 25) {
+                    // C. Specular crest highlight (light reflection on water surface)
+                    if (rip.hasHighlight) {
                         ctx.beginPath();
-                        ctx.arc(px, py, p.size, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(0, 245, 255, ${alpha * p.alpha})`;
-                        ctx.fill();
+                        ctx.arc(this.x, this.y, Math.max(0, r - 1.5), 0, Math.PI * 2);
+                        ctx.lineWidth = Math.max(0.8, rip.width * 0.45);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${ripAlpha * 0.75})`;
+                        ctx.shadowBlur = 4;
+                        ctx.stroke();
                     }
                 }
 
                 ctx.restore();
-            }
-        }
-
-        function spawnWave(isMinor = false) {
-            const center = getImageCenter();
-            waves.push(new Shockwave(center.x, center.y, center.radius * 0.95, isMinor));
-            if (!animationFrameId) {
-                animateWaves();
             }
         }
 
@@ -316,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            if (waves.length > 0 || isHovering) {
+            if (waves.length > 0) {
                 animationFrameId = requestAnimationFrame(animateWaves);
             } else {
                 ctx.clearRect(0, 0, width, height);
@@ -325,50 +311,43 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        function startWaveEmission() {
-            if (isHovering) return;
-            isHovering = true;
+        // Sends the water wave EXACTLY ONE TIME on hover
+        function triggerSingleWaterWave() {
+            if (waveFiredOnThisHover) return; // Prevent any repeated trigger during this hover
+            waveFiredOnThisHover = true;
+
+            const center = getImageCenter();
+            // Start a new water wave packet
+            waves = [new WaterWavePacket(center.x, center.y, center.radius * 0.95)];
+
+            heroSection.classList.remove('hero-wave-active');
+            // Force DOM reflow to restart CSS animation cleanly once
+            void heroSection.offsetWidth;
             heroSection.classList.add('hero-wave-active');
 
-            // Fire first wave immediately
-            spawnWave(false);
-
-            // Keep emitting waves at continuous intervals while hovering
-            if (waveInterval) clearInterval(waveInterval);
-            waveInterval = setInterval(() => {
-                if (isHovering) {
-                    spawnWave(false);
-                }
-            }, 420);
+            if (!animationFrameId) {
+                animateWaves();
+            }
         }
 
-        function stopWaveEmission() {
-            isHovering = false;
-            if (waveInterval) {
-                clearInterval(waveInterval);
-                waveInterval = null;
-            }
+        function resetHoverTrigger() {
+            // Reset flag when mouse leaves, allowing a new single wave on the next hover
+            waveFiredOnThisHover = false;
         }
 
         const targetEl = heroProfileImgContainer || heroProfileImg;
 
-        targetEl.addEventListener('mouseenter', startWaveEmission);
-        targetEl.addEventListener('mouseleave', stopWaveEmission);
+        // Hover events: triggers ONE time only per hover
+        targetEl.addEventListener('mouseenter', triggerSingleWaterWave);
+        targetEl.addEventListener('mouseleave', resetHoverTrigger);
 
-        targetEl.addEventListener('mousemove', function() {
-            const now = Date.now();
-            if (now - lastMoveWaveTime > 220) {
-                lastMoveWaveTime = now;
-                spawnWave(true);
-            }
-        });
-
+        // Mobile touch support: triggers one time per touch
         targetEl.addEventListener('touchstart', function() {
-            startWaveEmission();
+            triggerSingleWaterWave();
         }, { passive: true });
 
         targetEl.addEventListener('touchend', function() {
-            setTimeout(stopWaveEmission, 1000);
+            setTimeout(resetHoverTrigger, 800);
         }, { passive: true });
     }
 
