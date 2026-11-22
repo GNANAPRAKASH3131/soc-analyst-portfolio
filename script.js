@@ -152,25 +152,161 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     
-    // Interactive Liquid Distortion & Refraction Water Wave (One-Time per Hover)
+    // True Physics-Based WebGL Water Surface Ripple Simulation (One-Time per Hover)
     function initHeroWave() {
         const heroSection = document.getElementById('hero');
         const waveCanvas = document.getElementById('hero-wave-canvas');
-        const heroContent = document.querySelector('.hero-content');
-        const liquidDisplacement = document.getElementById('liquidDisplacement');
-        const liquidTurbulence = document.getElementById('liquidTurbulence');
         const heroProfileImgContainer = document.getElementById('heroProfileImgContainer') || document.querySelector('.hero-img');
         const heroProfileImg = document.getElementById('heroProfileImg') || (heroProfileImgContainer ? heroProfileImgContainer.querySelector('img') : null);
 
         if (!heroSection || !waveCanvas || !heroProfileImg) return;
 
-        const ctx = waveCanvas.getContext('2d');
+        let gl = null;
+        try {
+            gl = waveCanvas.getContext('webgl', { alpha: true, premultipliedAlpha: false, antialias: true }) ||
+                 waveCanvas.getContext('experimental-webgl', { alpha: true, premultipliedAlpha: false });
+        } catch (e) {
+            gl = null;
+        }
+
+        if (!gl) {
+            console.warn('WebGL not supported, water simulation skipped');
+            return;
+        }
+
+        const vsSource = `
+            attribute vec2 a_position;
+            void main() {
+                gl_Position = vec4(a_position, 0.0, 1.0);
+            }
+        `;
+
+        const fsSource = `
+            precision highp float;
+            uniform vec2 u_resolution;
+            uniform vec2 u_origin;
+            uniform float u_time;
+            uniform float u_duration;
+
+            vec3 getBgColor(vec2 uv) {
+                // Background gradient from #2a6bb4 (top-left) to #9fcdfe (bottom-right)
+                float t = clamp((uv.x + (1.0 - uv.y)) * 0.5, 0.0, 1.0);
+                vec3 col1 = vec3(0.165, 0.420, 0.706); // #2a6bb4
+                vec3 col2 = vec3(0.624, 0.804, 0.996); // #9fcdfe
+                return mix(col1, col2, t);
+            }
+
+            void main() {
+                vec2 st = gl_FragCoord.xy;
+                vec2 uv = st / u_resolution;
+
+                if (u_time <= 0.0 || u_time >= u_duration) {
+                    gl_FragColor = vec4(0.0);
+                    return;
+                }
+
+                float dist = length(st - u_origin);
+                float speed = 750.0; // px/second wave propagation
+                float r0 = u_time * speed;
+
+                float packetWidth = 140.0;
+                float diff = dist - r0;
+
+                // Outside wavefront packet: completely transparent
+                if (abs(diff) > packetWidth) {
+                    gl_FragColor = vec4(0.0);
+                    return;
+                }
+
+                // Smooth time decay: begins clear at droplet, gracefully dissipates
+                float life = clamp(1.0 - (u_time / u_duration), 0.0, 1.0);
+                float timeAlpha = life * life;
+
+                // Continuous Gaussian envelope across the ripple packet
+                float env = exp(-(diff * diff) / (2.0 * 45.0 * 45.0));
+
+                // Harmonic liquid ripples: wavelength ~ 46px
+                float k = 6.2831853 / 46.0;
+                float height = env * cos(k * diff) * timeAlpha;
+
+                // Exact analytic surface derivative for razor-smooth liquid normals
+                float dEnv = -(diff / 2025.0) * env;
+                float dHeight = (dEnv * cos(k * diff) - env * k * sin(k * diff)) * timeAlpha;
+
+                vec2 dir = (dist > 0.001) ? normalize(st - u_origin) : vec2(0.0, 1.0);
+                vec2 grad = dir * dHeight;
+
+                // 3D Liquid surface normal
+                vec3 normal = normalize(vec3(-grad.x * 24.0, -grad.y * 24.0, 1.0));
+
+                // Snell's Law optical refraction offset on the background
+                vec2 refrOffset = normal.xy * (16.0 / u_resolution);
+                vec3 refrColor = getBgColor(uv + refrOffset);
+
+                // Blinn-Phong specular sunlight reflection
+                vec3 lightDir = normalize(vec3(-0.4, 0.6, 0.9));
+                float spec = pow(max(0.0, dot(normal, lightDir)), 32.0);
+                vec3 specColor = vec3(1.0, 1.0, 1.0) * spec * 0.8 * timeAlpha;
+
+                // Ambient wave translucency
+                float waveStrength = clamp(abs(height) * 4.2 + spec * 1.1, 0.0, 1.0) * life;
+
+                gl_FragColor = vec4(refrColor + specColor, waveStrength);
+            }
+        `;
+
+        function createShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+                gl.deleteShader(shader);
+                return null;
+            }
+            return shader;
+        }
+
+        const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
+        const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+        if (!vs || !fs) return;
+
+        const program = gl.createProgram();
+        gl.attachShader(program, vs);
+        gl.attachShader(program, fs);
+        gl.linkProgram(program);
+
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            console.error('Program link error:', gl.getProgramInfoLog(program));
+            return;
+        }
+
+        gl.useProgram(program);
+
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+            -1, -1,
+             1, -1,
+            -1,  1,
+            -1,  1,
+             1, -1,
+             1,  1
+        ]), gl.STATIC_DRAW);
+
+        const posAttr = gl.getAttribLocation(program, 'a_position');
+        gl.enableVertexAttribArray(posAttr);
+        gl.vertexAttribPointer(posAttr, 2, gl.FLOAT, false, 0, 0);
+
+        const uRes = gl.getUniformLocation(program, 'u_resolution');
+        const uOrigin = gl.getUniformLocation(program, 'u_origin');
+        const uTime = gl.getUniformLocation(program, 'u_time');
+        const uDur = gl.getUniformLocation(program, 'u_duration');
+
         let width = 0;
         let height = 0;
         let dpr = window.devicePixelRatio || 1;
-        let wave = null;
-        let waveFiredOnThisHover = false;
-        let animationFrameId = null;
+        const DURATION = 2.4; // 2.4 seconds to sweep across the entire page
 
         function resizeCanvas() {
             const rect = heroSection.getBoundingClientRect();
@@ -181,177 +317,62 @@ document.addEventListener('DOMContentLoaded', function() {
             waveCanvas.height = height * dpr;
             waveCanvas.style.width = width + 'px';
             waveCanvas.style.height = height + 'px';
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.scale(dpr, dpr);
+            gl.viewport(0, 0, waveCanvas.width, waveCanvas.height);
         }
 
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
+        let startTime = 0;
+        let animationFrameId = null;
+        let waveOrigin = { x: 0, y: 0 };
+        let waveFiredOnThisHover = false;
+
         function getImageCenter() {
             const heroRect = heroSection.getBoundingClientRect();
             const imgRect = heroProfileImg.getBoundingClientRect();
+            // WebGL Y coordinate is from bottom (0) to top
             return {
-                x: (imgRect.left + imgRect.width / 2) - heroRect.left,
-                y: (imgRect.top + imgRect.height / 2) - heroRect.top,
-                radius: Math.min(imgRect.width, imgRect.height) / 2
+                x: ((imgRect.left + imgRect.width / 2) - heroRect.left) * dpr,
+                y: (heroRect.height - ((imgRect.top + imgRect.height / 2) - heroRect.top)) * dpr
             };
         }
 
-        // Real Liquid Water Refraction Wave (Gaussian fluid swell + refraction)
-        class LiquidWaterWave {
-            constructor(originX, originY, startRadius) {
-                this.x = originX;
-                this.y = originY;
-                this.radius = startRadius;
+        function renderFrame(now) {
+            const elapsed = (now - startTime) / 1000.0;
 
-                const d1 = Math.hypot(originX, originY);
-                const d2 = Math.hypot(width - originX, originY);
-                const d3 = Math.hypot(originX, height - originY);
-                const d4 = Math.hypot(width - originX, height - originY);
-                this.maxRadius = Math.max(d1, d2, d3, d4) + 180;
+            gl.clearColor(0, 0, 0, 0);
+            gl.clear(gl.COLOR_BUFFER_BIT);
 
-                this.speed = 11; // Fluid wave speed
-                this.contentBidded = false;
-                this.frame = 0;
-            }
+            if (elapsed < DURATION) {
+                gl.useProgram(program);
+                gl.uniform2f(uRes, waveCanvas.width, waveCanvas.height);
+                gl.uniform2f(uOrigin, waveOrigin.x, waveOrigin.y);
+                gl.uniform1f(uTime, elapsed);
+                gl.uniform1f(uDur, DURATION);
 
-            update() {
-                this.radius += this.speed;
-                this.frame++;
-
-                // Refraction distortion timing: ramp up when wave passes content, ramp down as it passes
-                if (liquidDisplacement && heroContent) {
-                    const progress = Math.min(1, Math.max(0, this.radius / this.maxRadius));
-                    // Smooth bell-shaped envelope for liquid refraction: 0 -> peak ~14 -> 0
-                    const refractionIntensity = Math.sin(progress * Math.PI);
-                    const currentScale = refractionIntensity * 14;
-
-                    liquidDisplacement.setAttribute('scale', currentScale.toFixed(2));
-
-                    if (liquidTurbulence && this.frame % 2 === 0) {
-                        const baseFreqX = (0.012 + Math.sin(this.frame * 0.05) * 0.003).toFixed(4);
-                        const baseFreqY = (0.022 + Math.cos(this.frame * 0.05) * 0.004).toFixed(4);
-                        liquidTurbulence.setAttribute('baseFrequency', `${baseFreqX} ${baseFreqY}`);
-                    }
-
-                    if (currentScale > 1.2) {
-                        heroContent.classList.add('liquid-refracting');
-                    } else {
-                        heroContent.classList.remove('liquid-refracting');
-                    }
-                }
-
-                // Progressive liquid bob on hero elements as the wave crest reaches them
-                if (!this.contentBidded && this.radius > (width * 0.35)) {
-                    this.contentBidded = true;
-                    triggerSequentialElementBobs();
-                }
-
-                return (this.radius - 120) < this.maxRadius;
-            }
-
-            draw(ctx) {
-                const progress = this.radius / this.maxRadius;
-                // Soft liquid dissipation curve merging smoothly into the background
-                const alpha = Math.max(0, Math.cos(progress * Math.PI * 0.5));
-                if (alpha <= 0.005) return;
-
-                ctx.save();
-
-                // 1. Primary Liquid Lens Swell (Continuous smooth fluid gradient - NO outline strokes!)
-                const outerR = this.radius + 35;
-                const innerR = Math.max(0, this.radius - 85);
-                if (outerR > 10) {
-                    const swellGrad = ctx.createRadialGradient(this.x, this.y, innerR, this.x, this.y, outerR);
-                    swellGrad.addColorStop(0, 'rgba(42, 107, 180, 0)');
-                    swellGrad.addColorStop(0.3, `rgba(42, 107, 180, ${alpha * 0.18})`); // deep water trough
-                    swellGrad.addColorStop(0.55, `rgba(159, 205, 254, ${alpha * 0.38})`); // water body
-                    swellGrad.addColorStop(0.78, `rgba(223, 240, 255, ${alpha * 0.48})`); // liquid crest
-                    swellGrad.addColorStop(0.88, `rgba(255, 255, 255, ${alpha * 0.28})`); // specular surface glint
-                    swellGrad.addColorStop(1, 'rgba(42, 107, 180, 0)');
-
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, outerR, 0, Math.PI * 2);
-                    ctx.fillStyle = swellGrad;
-                    ctx.fill();
-                }
-
-                // 2. Secondary Harmonic Ripple (gentle trailing liquid swell)
-                if (this.radius > 95) {
-                    const trailOuter = this.radius - 40;
-                    const trailInner = Math.max(0, this.radius - 130);
-                    const trailGrad = ctx.createRadialGradient(this.x, this.y, trailInner, this.x, this.y, trailOuter);
-                    trailGrad.addColorStop(0, 'rgba(42, 107, 180, 0)');
-                    trailGrad.addColorStop(0.4, `rgba(42, 107, 180, ${alpha * 0.12})`);
-                    trailGrad.addColorStop(0.7, `rgba(159, 205, 254, ${alpha * 0.22})`);
-                    trailGrad.addColorStop(0.85, `rgba(223, 240, 255, ${alpha * 0.26})`);
-                    trailGrad.addColorStop(1, 'rgba(42, 107, 180, 0)');
-
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, trailOuter, 0, Math.PI * 2);
-                    ctx.fillStyle = trailGrad;
-                    ctx.fill();
-                }
-
-                ctx.restore();
-            }
-        }
-
-        function triggerSequentialElementBobs() {
-            const elements = [
-                document.querySelector('.social-icons'),
-                document.querySelector('.hero-buttons'),
-                document.querySelector('.hero-content p'),
-                document.querySelector('.hero-content h2'),
-                document.querySelector('.hero-content h1')
-            ].filter(Boolean);
-
-            elements.forEach((el, index) => {
-                setTimeout(() => {
-                    el.classList.add('water-bob');
-                    setTimeout(() => {
-                        el.classList.remove('water-bob');
-                    }, 850);
-                }, index * 90);
-            });
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-
-            if (wave) {
-                const alive = wave.update();
-                if (alive) {
-                    wave.draw(ctx);
-                    animationFrameId = requestAnimationFrame(animate);
-                } else {
-                    wave = null;
-                    ctx.clearRect(0, 0, width, height);
-                    if (liquidDisplacement) liquidDisplacement.setAttribute('scale', '0');
-                    if (heroContent) heroContent.classList.remove('liquid-refracting');
-                    heroSection.classList.remove('hero-wave-active');
-                    animationFrameId = null;
-                }
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                animationFrameId = requestAnimationFrame(renderFrame);
             } else {
-                ctx.clearRect(0, 0, width, height);
+                gl.clearColor(0, 0, 0, 0);
+                gl.clear(gl.COLOR_BUFFER_BIT);
                 animationFrameId = null;
+                heroSection.classList.remove('hero-wave-active');
             }
         }
 
-        // Sends the liquid water refraction wave EXACTLY ONE TIME on hover
-        function triggerSingleLiquidWave() {
+        function triggerSingleWaterWave() {
             if (waveFiredOnThisHover) return;
             waveFiredOnThisHover = true;
 
-            const center = getImageCenter();
-            wave = new LiquidWaterWave(center.x, center.y, center.radius * 0.95);
+            resizeCanvas();
+            waveOrigin = getImageCenter();
+            startTime = performance.now();
 
             heroSection.classList.add('hero-wave-active');
 
-            if (!animationFrameId) {
-                animate();
-            }
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(renderFrame);
         }
 
         function resetHoverTrigger() {
@@ -361,12 +382,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const targetEl = heroProfileImgContainer || heroProfileImg;
 
         // One-time per hover
-        targetEl.addEventListener('mouseenter', triggerSingleLiquidWave);
+        targetEl.addEventListener('mouseenter', triggerSingleWaterWave);
         targetEl.addEventListener('mouseleave', resetHoverTrigger);
 
-        // Touch support
+        // Mobile touch support
         targetEl.addEventListener('touchstart', function() {
-            triggerSingleLiquidWave();
+            triggerSingleWaterWave();
         }, { passive: true });
 
         targetEl.addEventListener('touchend', function() {

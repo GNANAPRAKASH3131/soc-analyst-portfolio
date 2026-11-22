@@ -126,17 +126,7 @@
         </div>
     </header>
 
-    <!-- SVG Liquid Water Refraction Filter -->
-    <svg style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;" aria-hidden="true">
-        <defs>
-            <filter id="liquidWaterRefraction" x="-10%" y="-10%" width="120%" height="120%">
-                <feTurbulence id="liquidTurbulence" type="fractalNoise" baseFrequency="0.015 0.025" numOctaves="2" result="waterNoise" />
-                <feDisplacementMap id="liquidDisplacement" in="SourceGraphic" in2="waterNoise" scale="0" xChannelSelector="R" yChannelSelector="G" />
-            </filter>
-        </defs>
-    </svg>
-
-    <!-- Hero Section -->
+<!-- Hero Section -->
     <section id="hero" class="hero d-flex align-items-center">
         <!-- Interactive Cyber Wave Canvas -->
         <canvas id="hero-wave-canvas" class="hero-wave-canvas" aria-hidden="true"></canvas>
